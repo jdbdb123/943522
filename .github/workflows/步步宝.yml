@@ -38,6 +38,6 @@ jobs:
       - name: '运行 【步步宝】'
         run: |
           cd ~/TaskActions/workflow
-          node BBB.js
+          node BuBuBao.js
         env:
           TZ: Asia/shanghai
