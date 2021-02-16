@@ -18,6 +18,7 @@ from datetime import datetime, timezone, timedelta
 cookies1 = {
   'YOUTH_HEADER': {},
   'YOUTH_READBODY': '',
+  #'YOUTH_REDBODY': '',
   'YOUTH_READTIMEBODY': '',
   'YOUTH_WITHDRAWBODY': '',
   'YOUTH_SHAREBODY': ''
@@ -32,12 +33,14 @@ if "YOUTH_HEADER1" in os.environ:
   for i in range(5):
     headerVar = f'YOUTH_HEADER{str(i+1)}'
     readBodyVar = f'YOUTH_READBODY{str(i+1)}'
+  #  redBodyVar = f'YOUTH_REDBODY{str(i+1)}'
     readTimeBodyVar = f'YOUTH_READTIMEBODY{str(i+1)}'
     withdrawBodyVar = f'YOUTH_WITHDRAWBODY{str(i+1)}'
     shareBodyVar = f'YOUTH_SHAREBODY{str(i+1)}'
-    if headerVar in os.environ and os.environ[headerVar] and readBodyVar in os.environ and os.environ[readBodyVar] and redBodyVar in os.environ and os.environ[redBodyVar] and readTimeBodyVar in os.environ and os.environ[readTimeBodyVar]:
+    if headerVar in os.environ and os.environ[headerVar] and readBodyVar in os.environ and os.environ[readBodyVar] and  readTimeBodyVar in os.environ and os.environ[readTimeBodyVar]:
       globals()['cookies'+str(i + 1)]["YOUTH_HEADER"] = json.loads(os.environ[headerVar])
       globals()['cookies'+str(i + 1)]["YOUTH_READBODY"] = os.environ[readBodyVar]
+      # globals()['cookies'+str(i + 1)]["YOUTH_REDBODY"] = os.environ[redBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_READTIMEBODY"] = os.environ[readTimeBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_WITHDRAWBODY"] = os.environ[withdrawBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_SHAREBODY"] = os.environ[shareBodyVar]
@@ -622,6 +625,7 @@ def run():
   for i, account in enumerate(COOKIELIST):
     headers = account['YOUTH_HEADER']
     readBody = account['YOUTH_READBODY']
+ #   redBody = account['YOUTH_REDBODY']
     readTimeBody = account['YOUTH_READTIMEBODY']
     withdrawBody = account['YOUTH_WITHDRAWBODY']
     shareBody = account['YOUTH_SHAREBODY']
@@ -665,7 +669,10 @@ def run():
       content += f'\n【观看视频】：+{watch_ad_video_res["score"]}个青豆'
     watch_game_video_res = watchGameVideo(body=readBody)
     if watch_game_video_res:
-      content += f'\n【激励视频】：{watch_game_video_res["score"]}个
+      content += f'\n【激励视频】：{watch_game_video_res["score"]}个青豆'
+    # article_red_res = articleRed(body=redBody)
+    # if article_red_res:
+    #   content += f'\n【惊喜红包】：+{article_red_res["score"]}个青豆'
     read_time_res = readTime(body=readTimeBody)
     if read_time_res:
       content += f'\n【阅读时长】：共计{int(read_time_res["time"]) // 60}分钟'
@@ -701,12 +708,12 @@ def run():
       score = int(stat_res["user"]["score"])
       total_score = int(stat_res["user"]["total_score"])
 
-      if score >= 300000 and withdrawBody:
+      if score >= 100000 and withdrawBody:
         with_draw_res = withdraw(body=withdrawBody)
         if with_draw_res:
-          result += f'\n【自动提现】：发起提现30元成功'
-          content += f'\n【自动提现】：发起提现30元成功'
-          send(title=title, content=f'【账号】: {sign_info["user"]["nickname"]} 发起提现30元成功')
+          result += f'\n【自动提现】：发起提现10元成功'
+          content += f'\n【自动提现】：发起提现10元成功'
+          send(title=title, content=f'【账号】: {sign_info["user"]["nickname"]} 发起提现10元成功')
 
       result += f'\n【今日收益】：+{"{:4.2f}".format(today_score / 10000)}'
       content += f'\n【今日收益】：+{"{:4.2f}".format(today_score / 10000)}'
