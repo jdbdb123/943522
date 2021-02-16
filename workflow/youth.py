@@ -18,7 +18,6 @@ from datetime import datetime, timezone, timedelta
 cookies1 = {
   'YOUTH_HEADER': {},
   'YOUTH_READBODY': '',
-  'YOUTH_REDBODY': '',
   'YOUTH_READTIMEBODY': '',
   'YOUTH_WITHDRAWBODY': '',
   'YOUTH_SHAREBODY': ''
@@ -33,14 +32,12 @@ if "YOUTH_HEADER1" in os.environ:
   for i in range(5):
     headerVar = f'YOUTH_HEADER{str(i+1)}'
     readBodyVar = f'YOUTH_READBODY{str(i+1)}'
-    redBodyVar = f'YOUTH_REDBODY{str(i+1)}'
     readTimeBodyVar = f'YOUTH_READTIMEBODY{str(i+1)}'
     withdrawBodyVar = f'YOUTH_WITHDRAWBODY{str(i+1)}'
     shareBodyVar = f'YOUTH_SHAREBODY{str(i+1)}'
     if headerVar in os.environ and os.environ[headerVar] and readBodyVar in os.environ and os.environ[readBodyVar] and redBodyVar in os.environ and os.environ[redBodyVar] and readTimeBodyVar in os.environ and os.environ[readTimeBodyVar]:
       globals()['cookies'+str(i + 1)]["YOUTH_HEADER"] = json.loads(os.environ[headerVar])
       globals()['cookies'+str(i + 1)]["YOUTH_READBODY"] = os.environ[readBodyVar]
-      globals()['cookies'+str(i + 1)]["YOUTH_REDBODY"] = os.environ[redBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_READTIMEBODY"] = os.environ[readTimeBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_WITHDRAWBODY"] = os.environ[withdrawBodyVar]
       globals()['cookies' + str(i + 1)]["YOUTH_SHAREBODY"] = os.environ[shareBodyVar]
@@ -437,29 +434,7 @@ def visitReward(body):
     print(traceback.format_exc())
     return
 
-def articleRed(body):
-  """
-  惊喜红包
-  :param headers:
-  :return:
-  """
-  time.sleep(0.3)
-  url = 'https://ios.baertt.com/v5/article/red_packet.json'
-  headers = {
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-  }
-  try:
-    response = requests_session().post(url=url, data=body, headers=headers, timeout=30).json()
-    print('惊喜红包')
-    print(response)
-    if response['success'] == True:
-      return response['items']
-    else:
-      return
-  except:
-    print(traceback.format_exc())
-    return
+
 
 def readTime(body):
   """
