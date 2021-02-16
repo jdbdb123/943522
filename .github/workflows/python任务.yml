@@ -1,4 +1,4 @@
-name: 中青任务
+name: python任务
 
 on:
   schedule:
@@ -18,13 +18,20 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: 'Install requests'
-        run: pip install requests
+      - name: 'Install requirements'
+        run: pip install -r ./workflow/requirements.txt
 
-      - name: 'run 中青任务'
-        # youth_read.py目录自己修改
+
+      - name: '运行【喜马拉雅极速版】'
+        run: python3 ./workflow/xmly_speed.py
+        env:
+          TZ: Asia/shanghai
+          XMLY_SPEED_COOKIE: ${{ secrets.XMLY_SPEED_COOKIE }}
+          BARK: ${{ secrets.BARK }}     # bark服务
+
+
+      - name: '运行【中青任务】'
         run: python3 workflow/youth.py
-        # 目前最大5个账号，可按格式继续填写
         env:
           YOUTH_HEADER1: ${{ secrets.YOUTH_HEADER1 }}  #必须 账号1 body1
           YOUTH_READBODY1: ${{ secrets.YOUTH_READBODY1 }}  #必须 账号1 body1
@@ -39,8 +46,3 @@ jobs:
           YOUTH_WITHDRAWBODY2: ${{ secrets.YOUTH_READTIMEBODY2 }}  #非必须 账号2提现 body2
           YOUTH_SHAREBODY2: ${{ secrets.YOUTH_SHAREBODY2 }}  #非必须 账号2分享 body2
           BARK: ${{ secrets.BARK }}  #非必须 bark通知
-          SCKEY: ${{ secrets.SCKEY }}  #非必须 server酱通知
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}  #非必须 tg机器人token
-          TG_USER_ID: ${{ secrets.TG_USER_ID }}  #非必须 tg机器人userId
-          DD_BOT_ACCESS_TOKEN: ${{ secrets.DD_BOT_ACCESS_TOKEN }}  #非必须 钉钉机器人token
-          DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}  #非必须 钉钉机器人secret
