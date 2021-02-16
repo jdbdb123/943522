@@ -263,7 +263,7 @@ if ($.isNode()) {
     );
   }
 
-  if (hour == 9 || hour == 14) {
+  if (hour == 9 || hour == 11 || hour == 14) {
     await videoread(); //自动刷视频
   }else if (hour == 12) {
     console.log(`\n✅ 执行自行助力任务`)
