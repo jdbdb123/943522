@@ -39,7 +39,7 @@ jobs:
       - name: '运行 【葱花视频】'
         run: |
           cd ~/TaskActions/workflow
-          node chonghua.js
+          node conghua.js
         env:
           TZ: Asia/shanghai
 
