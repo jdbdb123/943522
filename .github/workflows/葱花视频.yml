@@ -6,7 +6,7 @@ name: 葱花视频
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 0-15 * * *'
+    - cron: '30 0 * * *'
   watch:
     types: conghua
   repository_dispatch:
