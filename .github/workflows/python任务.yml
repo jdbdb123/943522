@@ -1,12 +1,12 @@
 name: python任务
 
 on:
-  
+  workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
   watch:
     types: [started]
-  workflow-dispatch
+
 jobs:
   build:
     env:
