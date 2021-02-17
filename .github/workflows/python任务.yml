@@ -26,7 +26,7 @@ jobs:
         run: pip install -r ./workflow/requirements.txt
 
       - name: '运行【中青看点极速版】'
-        run: python3 ./workflow/youth.py
+        run: python3 workflow/youth.py
         env:
           TZ: Asia/shanghai
 
