@@ -10,7 +10,7 @@ on:
   watch:
     types: started
   repository_dispatch:
-    types: dianshijia
+    types: baidu_speed
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,4 +43,3 @@ jobs:
         env:
           TZ: Asia/shanghai
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
-
