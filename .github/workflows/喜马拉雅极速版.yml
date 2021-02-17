@@ -25,15 +25,12 @@ jobs:
       - name: 'Install requirements'
         run: pip install -r ./workflow/requirements.txt
 
-      - name: '运行【中青看点极速版】'
-        run: python3 workflow/youth.py
-        env:
-          TZ: Asia/shanghai
 
-#       - name: '运行【喜马拉雅极速版】'
-#         run: python3 ./workflow/xmly_speed.py
-#         env:
-#           TZ: Asia/shanghai
-#           XMLY_SPEED_COOKIE: ${{ secrets.XMLY_SPEED_COOKIE }}
+
+       - name: '运行【喜马拉雅极速版】'
+         run: python3 ./workflow/xmly_speed.py
+         env:
+           TZ: Asia/shanghai
+           XMLY_SPEED_COOKIE: ${{ secrets.XMLY_SPEED_COOKIE }}
 
 
