@@ -15,15 +15,16 @@ from datetime import datetime, timezone, timedelta
 # YOUTH_HEADER 为对象, 其他参数为字符串，自动提现需要自己抓包
 # 选择微信提现30元，立即兑换，在请求包中找到withdraw2的请求，拷贝请求body类型 p=****** 的字符串，放入下面对应参数即可
 # 分享一篇文章，找到 put.json 的请求，拷贝请求体，放入对应参数
-cookies1 = {
-  'YOUTH_HEADER': {},
-  'YOUTH_READBODY': '',
+
+cookies1= {
+  'YOUTH_HEADER': {&uid=48317856&cookie=MDAwMDAwMDAwMJCMpN-w09Wtg5-Bb36eh6CPqHualq2jmrCarWKyp4GxhbKcl6_OqmqXr6NthJl7mI-shMmXeqDau4StacS3o7GFonrfr7nMaIGfn26EY2Ft&cookie_id=138884b320c9be9810b83bd042131b8f},
+  'YOUTH_READBODY': 'p=9NwGV8Ov71o%3DgW5NEpb6rjbWryKNkFf95n56YTW8D07d81TTBTKCgcGizFermzl5HouhONtlo3lkPZbSlDKzq6S56Q4-P6XDlaoMEdoSr5lsVI6MP4niBzvVXLKZh0cW3HWJ7YW_Sqb1T2gzds55OTJraFkRVPv2e6m825M-CVBpCs_BL2jrv4fjBxpKf4CVQmumAXEV2ljDZRgCFOTvRk2xPYlfnrtNeQHDE_jmAIBW-EQ5uh7PdxeMhVzfb7jRIPw8Wc8Lym7vmFnqBbESkdyKmsqrPK-tr6oSNR887By8OwJzaxqZgejGHSi9lglYlAE1MsyIDeMaqDD90Qx_kXnkmmOOZWzNZJ-CexXDEPtxTlAAznRHFTyJsYfFwEwptzzkGIfIqTUQbmC4OzaN55mqbzYABB4rEZyqIUebjdM84WfCKi4Es8c_RDMqEJCeg7pLGSqJhAZrcqzsKhh0yZTvsTcmKxHIvdmN9kBGEBNu9Ug7UVA7lZrXpYI9ohR2W_iQh8mTA4FjTUB-EW_RQIrUYJfvEgk0YsxPHy3dRuDBUVYCwRktNPar_q4Pbz3C1PCFT2NCuey_P3d-cNH4t79jj3t1hESFo0fsGgtWEYuEtmpdUgSoS6vOc8Ht4Xfab0qPw7B51HvqEs6KoWSCKF9yfwqSJfgrHM-XD8MXvf4VMHL2XUWlxVDREeGoqe-FWhkZ9XSvmg0P-tOgcZv-m9xXECnIMC15s4QcB1bJL02vhuY4gQJite4%3D',
   'YOUTH_REDBODY': '',
-  'YOUTH_READTIMEBODY': '',
+  'YOUTH_READTIMEBODY': 'p=9NwGV8Ov71o%3DgW5NEpb6rjb84bkaCQyOq-myT0C-Ktb_pYgxM135XoUfaIpfBqAxRGnFAl1k71C_zMPfUdFlHJTcuxYW9LgBCdTzuda7fnA8r2K-D8AqSYWzt-6LIEcC8SPkaeAgjjv1iCeYI_yckjGbVxJEy1xSQc4qp-_g8cJecymP34l6mTdhrAFOGFSilTZLFPqCU_7ljMkOcqw8aw9ACCV1tABKy-K4-Jg7iuN14D9ZxcCkpLQuoyscNUu6dpYc_XmDxz3fHrskZgTDKB-2gLPbM8ZYfJypwXE2d46Wg3879ZY8Zw28NrvMjgIqeqtpakesO0JIbVx0sDvKjCoeyEzBb9kz4npcLJo6q0HmQM_RfjgohAPz0Kyk6LAEaYOqb0z3RGYke1DTl-jgVEbmEvsgmBQxVgShYbNmUXQH3IEvYtIdul1qBbi4FJ4On--Ueid8lctK-StxlVwI4cWmAsvX5mSOldEkyofjxuvYYjMZYlg3FtSBgFy49y4puqXabwTydunVCFKKh2mHdPYxOWTagVeJYgcn_Tfec1-9B8zIzIBt--gDLfTPKwzTReJhctqLy7mwDM2yFQQmvxMIiYIioY4OKpTu7bAYonif9hJ4-9eXqTO8YcOnmXo3qla7w8S9djYT-L2hmCDvcHYN5S1kdSb-FmOrtKramoobrJKRw0fBQORg4945MYdYUMwlPN4cMV5G9YulAK1SLXNqE0AQo-ki5K1VMKmP9qQKLaS1dEQWxX0ObOXu2KT0955KiNi17Ob9nirPWVZ0rrJkQap2f8I9mfBZgOUAjTOzKm3vvgeki9-AjAgXptK8YwqCNrzVCLmR',
   'YOUTH_WITHDRAWBODY': '',
-  'YOUTH_SHAREBODY': ''
+  'YOUTH_SHAREBODY': 'access=4G&app_version=2.0.0&article_id=36323814&channel=80000000&channel_code=80000000&cid=80000000&client_version=2.0.0&device_brand=iphone&device_id=0&device_model=iPhone&device_platform=iphone&device_type=iphone&from=0&is_hot=0&isnew=1&mobile_type=2&net_type=2&openudid=29a522d895c83da15782b837e67e366d&os_version=12.4&phone_code=29a522d895c83da15782b837e67e366d&phone_network=4G&platform=3&request_time=1613512796&resolution=750x1334&sign=96f08bbda3f4e1a59a1dac681a83045a&sm_device_id=20200807165353add46c9059ea3df1d982bbb29581049001ad471a612138c7&stype=WEIXIN_CIRCLE&szlm_ddid=D27z7X/BHYslUmEyamEU4ik/+EChhiczlCt6UZzFTN47wXa2&time=1613512796&uid=48317856&uuid=29a522d895c83da15782b837e67e366d'
 }
-cookies2 = {}
+
 
 COOKIELIST = [cookies1,]  # 多账号准备
 
