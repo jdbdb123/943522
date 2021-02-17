@@ -6,7 +6,7 @@ on:
     - cron: '*/30 * * * *'
   watch:
     types: [started]
-  workflow-dispatch:
+  workflow-dispatch
 jobs:
   build:
     env:
