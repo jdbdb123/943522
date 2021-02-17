@@ -32,7 +32,7 @@ jobs:
       #    XMLY_SPEED_COOKIE: ${{ secrets.XMLY_SPEED_COOKIE }}
 
 
-     - name: '运行【中青看点极速版】'
+       - name: '运行【中青看点极速版】'
         run: python3 ./workflow/youth.py
         env:
           TZ: Asia/shanghai
