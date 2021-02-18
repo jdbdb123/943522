@@ -44,7 +44,7 @@ let url = {
            
     const result = JSON.parse(data)
         if(result.code == 0){
-        console.log('闪挣小视频回执:成功🌝 '+result.message)
+        console.log('闪挣小视频回执:成功😄 '+result.message)
 }
 if(result.code == 400){
         console.log('闪挣小视频回执:失败🚫 '+result.message)}
@@ -72,7 +72,7 @@ let url = {
            
     const result = JSON.parse(data)
         if(result.code == 0){
-        console.log('闪挣小游戏回执:成功🌝 '+result.message)
+        console.log('闪挣小游戏回执:成功😄 '+result.message)
 }
 if(result.code == 400){
         console.log('闪挣小游戏回执:失败🚫 '+result.mesaage)}
