@@ -1,8 +1,8 @@
+
 name: 闪挣
 
 on:
   workflow_dispatch:
-
   schedule:
      - cron: '*/10 * * * *'
   watch:
@@ -12,17 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 10.x
+      - name: Checkout
+        run: |
+          git clone https://github.com/Xin-Qiang/TaskActions.git ~/TaskActions
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 12.x
       - name: npm install
         run: |
-          npm install
-      - name: '运行 【闪挣】'   
+          cd ~/TaskActions
+      - name: '运行 【闪挣】'
         run: |
-          node workflows/sz.js
+          cd ~/TaskActions/workflows
+          node sz.js
         env:
+          
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}	                  
           SZURL: ${{ secrets.SZURL }}
           SZHD: ${{ secrets.SZHD }}
+
+          
+          
