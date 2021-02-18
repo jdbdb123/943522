@@ -4,10 +4,6 @@
 
 */
 const $ = new Env('闪挣');
-//设置url
-$.setdata("https://api-9f9d25.sz365.cn/api/virtual_currency_v2/reward",'szurl')
-//设置header 
-$.setdata('{"Cookie":"lqsw_android_session=J5VW8fGVb6CxjMYMAxmkP3HuautKuzul1Yv8MykT","Accept":"application/json, text/javascript, */*; q=0.01","Content-Type":"application/x-www-form-urlencoded","Accept-Encoding":"br, gzip, deflate","Connection":"keep-alive","Host":"api-9f9d25.sz365.cn","User-Agent":"shan zheng/2.2.5 (iPhone; iOS 12.4; Scale/2.00) NetType/4G","Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktOWY5ZDI1LnN6MzY1LmNuXC9hcGlcL2FwcFwvZmxhc2hfbG9naW4iLCJpYXQiOjE2MTM2MTU2ODEsImV4cCI6MTYxMzcwMjA4MSwibmJmIjoxNjEzNjE1NjgxLCJqdGkiOiJNTUM1MWFsbWU5bngySDBTIiwic3ViIjoyMTIzNjc0LCJwcnYiOiI4ZGNhNzhkOGViZTgwYWQzZjM2MGI1YmQxNzQ2MjFmMThkZDFlOWFlIiwiZGV2aWNlX2lkIjoyMDg0NTU0LCJrZXlfYXBwX2lkIjoiNCIsInN5cyI6IjEiLCJwcm9kdWN0aW9uX2lkIjoiMSJ9.kTJyGjmbWQ9e7jOUpmuFt82NILuHIVJizY5q7_JvhXY","Content-Length":"8","Accept-Language":"zh-Hans-CN;q=1, en-US;q=0.9"}','szhd')
 
 let szurl = $.getdata('szurl')
 let szhd = $.getdata('szhd')
@@ -26,7 +22,19 @@ let szhd = $.getdata('szhd')
   .finally(() => $.done())
 
 
-
+//闪挣数据获取
+function szck() {
+   if ($request.url.indexOf("virtual_currency_v2/reward") > -1){
+ const szurl = "https://api-9f9d25.sz365.cn/api/virtual_currency_v2/reward"
+  if(szurl)     $.setdata(szurl,'szurl')
+    $.log(szurl)
+    const szhd = JSON.stringify('{"Cookie":"lqsw_android_session=J5VW8fGVb6CxjMYMAxmkP3HuautKuzul1Yv8MykT","Accept":"application/json, text/javascript, */*; q=0.01","Content-Type":"application/x-www-form-urlencoded","Accept-Encoding":"br, gzip, deflate","Connection":"keep-alive","Host":"api-9f9d25.sz365.cn","User-Agent":"shan zheng/2.2.5 (iPhone; iOS 12.4; Scale/2.00) NetType/4G","Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGktOWY5ZDI1LnN6MzY1LmNuXC9hcGlcL2FwcFwvZmxhc2hfbG9naW4iLCJpYXQiOjE2MTM2MTU2ODEsImV4cCI6MTYxMzcwMjA4MSwibmJmIjoxNjEzNjE1NjgxLCJqdGkiOiJNTUM1MWFsbWU5bngySDBTIiwic3ViIjoyMTIzNjc0LCJwcnYiOiI4ZGNhNzhkOGViZTgwYWQzZjM2MGI1YmQxNzQ2MjFmMThkZDFlOWFlIiwiZGV2aWNlX2lkIjoyMDg0NTU0LCJrZXlfYXBwX2lkIjoiNCIsInN5cyI6IjEiLCJwcm9kdWN0aW9uX2lkIjoiMSJ9.kTJyGjmbWQ9e7jOUpmuFt82NILuHIVJizY5q7_JvhXY","Content-Length":"8","Accept-Language":"zh-Hans-CN;q=1, en-US;q=0.9"}')
+        if(szhd)    $.setdata(szhd,'szhd')
+    $.log(szhd)
+    
+   $.msg($.name,"","闪挣数据获取成功！")
+  }
+}
 //闪挣小视频
 function szsp(timeout = 0) {
   return new Promise((resolve) => {
