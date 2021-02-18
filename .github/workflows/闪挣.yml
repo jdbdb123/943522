@@ -26,7 +26,7 @@ jobs:
           cd ~/TaskActions
       - name: '运行 【闪挣】'
         run: |
-          cd ~/TaskActions
+          cd ~/TaskActions/workflow
           node sz.js
         env:
           
