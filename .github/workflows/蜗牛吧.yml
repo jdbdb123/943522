@@ -29,6 +29,6 @@ jobs:
       - name: '运行 【wnb】'
         if: env.WNB_HD
         run: |
-          node task/wnb.js
+          node workflow/wnb.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
