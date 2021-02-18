@@ -1,3 +1,6 @@
+/*
+@age174
+*/
 const $ = new Env('蜗牛吧');
 let wnburl = $.getdata('wnburl')
 let wnbhd = $.getdata('wnbhd')
