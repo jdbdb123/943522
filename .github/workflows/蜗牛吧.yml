@@ -4,7 +4,7 @@ name: 蜗牛吧
 on:
   workflow_dispatch:
   schedule:
-     - cron: '7/30 0-14 * * *'
+     - cron: '15,45 0-14 * * *'
   watch:
     types: started
 jobs:
