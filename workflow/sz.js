@@ -31,7 +31,6 @@ function szck() {
  $.setdata(szhd,'szhd')
    
   }
-}
 //闪挣小视频
 function szsp(timeout = 0) {
   return new Promise((resolve) => {
