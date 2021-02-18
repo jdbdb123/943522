@@ -6,7 +6,7 @@ name: 步步宝
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 0-15/2 * * *'
+    - cron: '*/11 * * * *'
   watch:
     types: started
   repository_dispatch:
@@ -38,6 +38,6 @@ jobs:
       - name: '运行 【企鹅读书】'
         run: |
           cd ~/TaskActions/workflow
-          node qqreadSign.js
+          node qqreadBook.js
         env:
           TZ: Asia/shanghai
