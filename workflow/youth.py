@@ -422,7 +422,7 @@ def visitReward(body):
   time.sleep(0.3)
   url = 'https://ios.baertt.com/v5/mission/msgRed.json'
   headers = {
-    'User-Agent': 'KDApp/1.8.0 (iPhone; iOS 14.2; Scale/3.00)',
+    'User-Agent': 'KDApp/2.0.0 (iPhone; iOS 14.5; Scale/3.00)',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
   try:
@@ -446,7 +446,7 @@ def articleRed(body):
   time.sleep(0.3)
   url = 'https://ios.baertt.com/v5/article/red_packet.json'
   headers = {
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
   try:
@@ -470,7 +470,7 @@ def readTime(body):
   time.sleep(0.3)
   url = 'https://ios.baertt.com/v5/user/stay.json'
   headers = {
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
   try:
@@ -602,7 +602,7 @@ def withdraw(body):
   time.sleep(0.3)
   url = 'https://ios.baertt.com/v5/wechat/withdraw2.json'
   headers = {
-    'User-Agent': 'KDApp/1.8.0 (iPhone; iOS 14.2; Scale/3.00)',
+    'User-Agent': 'KDApp/2.0.0 (iPhone; iOS 14.5; Scale/3.00)',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
   try:
@@ -730,12 +730,12 @@ def run():
       score = int(stat_res["user"]["score"])
       total_score = int(stat_res["user"]["total_score"])
 
-      if score >= 100000 and withdrawBody:
+      if score >= 300000 and withdrawBody:
         with_draw_res = withdraw(body=withdrawBody)
         if with_draw_res:
-          result += f'\n【自动提现】：发起提现10元成功'
-          content += f'\n【自动提现】：发起提现10元成功'
-          send(title=title, content=f'【账号】: {sign_info["user"]["nickname"]} 发起提现10元成功')
+          result += f'\n【自动提现】：发起提现30元成功'
+          content += f'\n【自动提现】：发起提现30元成功'
+          send(title=title, content=f'【账号】: {sign_info["user"]["nickname"]} 发起提现30元成功')
 
       result += f'\n【今日收益】：+{"{:4.2f}".format(today_score / 10000)}'
       content += f'\n【今日收益】：+{"{:4.2f}".format(today_score / 10000)}'
