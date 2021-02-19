@@ -1,4 +1,3 @@
-*/
 const $ = new Env('百度极速版')
 let CookieArr = [],cashArr=[];
 const notify = $.isNode() ? require('./sendNotify') : '';
