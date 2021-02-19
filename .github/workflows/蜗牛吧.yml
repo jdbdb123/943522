@@ -29,6 +29,6 @@ jobs:
       - name: '运行 【蜗牛吧】'
         if: env.WNB_HD
         run: |
-          node workflow/wnb.js
+          node workflow/WoNiuBa.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
