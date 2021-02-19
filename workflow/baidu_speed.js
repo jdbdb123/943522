@@ -12,23 +12,20 @@ let CookieArr = [];
 let UA = `Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 SP-engine/2.24.0 info baiduboxapp/5.1.0.10 (Baidu; P2 14.2)`
 
 if ($.isNode()) {
-//  if (process.env.BAIDU_COOKIE && process.env.BAIDU_COOKIE.indexOf('&') > -1) {
-//  StartBody = process.env.BAIDU_COOKIE.split('&');
-//  }
-// if (process.env.BAIDU_COOKIE && process.env.BAIDU_COOKIE.indexOf('\n') > -1) {
-//  BDCookie = process.env.BAIDU_COOKIE.split('\n');
-//  } else {
-//  BDCookie = process.env.BAIDU_COOKIE.split()
-//  }
-//  Object.keys(BDCookie).forEach((item) => {
-//        if (BDCookie[item]) {
-//          CookieArr.push(BDCookie[item])
-//        }
-//    })
-
-    CookieArr.push('st_data=fc407330f89a9be1f2ec9d0f809d06e572d681aaffb7df87257f9d79fa680452379da95bd8592f03cd37b8f39d053defcad34fbd9ede7c8c83d25b566b03da385d4b490d63b46d55c7e51f7ea3deded88b902d64779e427482e4721d207549648761665391070d55a4b0cb2ac93bea8aa3709ecdcedfa0274c0323369fd447a3; st_key_id=17; st_sign=0ca2abe5; Hm_lpvt_7d6994d7e4201dd18472dd1ef27e6217=1613611430; Hm_lvt_7d6994d7e4201dd18472dd1ef27e6217=1613610709,1613611430; BDPASSGATE=IlPT2AEptyoA_yiU4VKJ3kIN8efBYvCAH44JSyRx3lO4fCaWmhH3BrVMSEnHN-a8AiTM-Y3fo_-5kV8PQlxmicwdggYTpW-H7CG-zNSF5aTvL_NgzbIZCb4jQUZqqvzxkgl-zuEHQ49zBCstpBTbpuo4ivKl73JQb4r56kCygKrl_oGm2X8My88bOXVfYZ0APNu594rXnEpKLDm4YxutT9PecSIMR7QEy0uymMs92AuIsyAjJfX_L3AfAGrG1yp3XQinGPa0xKiKB-Uv5JMlVSw6nUSF5uy; H_WISE_SIDS=107319_110085_114551_127969_131423_144966_154212_156286_160663_162371_163507_164163_164217_165136_165327_165333_165616_165935_166025_166147_166185_166256_166292_166830_167070_167085_167109_167114_167389_167538_168029_168238_168403_168541_168748_168767_168909_168913_168972_169066_169165_169187_169308_169309_169374_169511; delPer=0; Hm_lpvt_98b9d8c2fd6608d564bf2ac2ae642948=1613610889; Hm_lvt_98b9d8c2fd6608d564bf2ac2ae642948=1613610837; SEENKW=%E5%8E%9F%E7%A5%9E%23%E9%99%88%E7%9C%9F; USER_JUMP=-1; CLIENTHEIGHT=603; CLIENTWIDTH=375; TIEBAUID=ab202a74fa2a4dd065dafbfb; BDUSS=GlDc3ZNMzFCdS1RWlpGRmhuRmU3N0NZNmhXbFFEOHhqLVc5cmo1MFBwMzZTMVZnRUFBQUFBJCQAAAAAAAAAAAEAAABjNwHOz6vG4ti8WGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPq-LWD6vi1gW; IS_NEW_USER=e1100a0dedf42a0113b255d0; BDORZ=FAE1F8CFA4E8841CC28A015FEAEE495D; BA_HECTOR=2l8g252k840404a4em1g2rfmi0q; SE_LAUNCH=5%3A1613610704; BAIDUID=3383467946BC1683BCBA10A558AABB96:FG=1')
-}
-else {
+  if (process.env.BAIDU_COOKIE && process.env.BAIDU_COOKIE.indexOf('&') > -1) {
+  StartBody = process.env.BAIDU_COOKIE.split('&');
+  }
+ if (process.env.BAIDU_COOKIE && process.env.BAIDU_COOKIE.indexOf('\n') > -1) {
+  BDCookie = process.env.BAIDU_COOKIE.split('\n');
+  } else {
+  BDCookie = process.env.BAIDU_COOKIE.split()
+  }
+  Object.keys(BDCookie).forEach((item) => {
+        if (BDCookie[item]) {
+          CookieArr.push(BDCookie[item])
+        }
+    })
+} else {
  CookieArr.push($.getdata(`chavy_cookie_tieba`)||$.getdata(`CookieTB`))
 }
 if ($.isNode()) {
@@ -41,6 +38,8 @@ if ($.isNode()) {
     console.log($.name, '【提示】请把百度Cookie填入Github 的 Secrets 中，请以&或者换行隔开')
     return;
   }
+
+
 
 
   console.log(`您共提供${CookieArr.length}个百度账号Cookie`)
