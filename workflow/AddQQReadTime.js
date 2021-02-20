@@ -1,6 +1,6 @@
 /*
 
- @𝐃𝐃
+ @github By DD-D1
 
 */
 
@@ -100,7 +100,26 @@ function bookShelfInitSign() {
 }
 
 
+function fromGuidSign() {
+  return new Promise((resolve) => {
+      let Url = {
+        url :  "https://mqqapi.reader.qq.com/mqq/red_packet/user/page?fromGuid=",
+        headers : JSON.parse($.getdata('pageheader')),
 
+      }
+      $.get(Url, async (err, resp, data) => {
+        try {
+          data = JSON.parse(data);
+          if(logs==1)console.log(data)
+          $.fromGuid = data;
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+      })
+  })
+}
 
 function initSign() {
   return new Promise((resolve) => {
