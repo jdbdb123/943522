@@ -37,9 +37,7 @@ $.setdata("https://mqqapi.reader.qq.com/mqq/red_packet/user/clock_in/page",'page
 $.setdata('{"ywsession":"o3ew3u62dinw47p72vcl2i7ljookcrki","Cookie":"ywguid=878628051;ywkey=ywqWiuvaviST;platform=ios;channel=mqqmina;mpVersion=1.9.1","Connection":"keep-alive","Content-Type":"application/json","Accept":"*/*","Host":"mqqapi.reader.qq.com","User-Agent":"QQ/8.3.0.608 CFNetwork/978.0.7 Darwin/18.7.0","Referer":"https://appservice.qq.com/1110657249/1.9.1/page-frame.html","Accept-Language":"zh-cn","Accept-Encoding":"br, gzip, deflate","mpversion":"1.9.1"}','pageheader')
 
 !(async () => {
-  if (typeof $request != "undefined") {
-    await qedssign()
-  } else {
+ 
     await initSign()
     await bookShelfInitSign()
     await fromGuidSign()
@@ -48,7 +46,7 @@ $.setdata('{"ywsession":"o3ew3u62dinw47p72vcl2i7ljookcrki","Cookie":"ywguid=8786
     await seconds1Sign()
     await seconds2Sign()
     await Msg()
-  }
+  
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
@@ -257,75 +255,6 @@ if(log==1)console.log(dd)
 
  if(noNolog==0)$.msg($.name,"",dd)
 }
-
-
-function qedssign() {
-  if ($request.url.indexOf("clock_in/page") > -1) {
-    const pageSignurl = $request.url
-    if (pageSignurl) $.setdata($request.url,'pagesignurl')
-    $.log(
-`[${$.name}]获取pageSignurl成功✔,pageSignurl: ${pageSignurl}`
-    );
-
-   const pageHeader = JSON.stringify($request.headers);
-if (pageHeader) $.setdata(pageHeader,'pageheader')
-    $.log(
-`[${$.name}]获取pageHeader成功✔,pageHeader: ${pageHeader}`
-    );  
-    $.msg($.name,"","[获取签到数据]成功✔")}
-
-else
-if ($request.url.indexOf("addReadTimeWithBid?") > -1) {
-
-const addReadTimesignurl = $request.url
-    if (addReadTimesignurl) $.setdata($request.url,'addReadTimesignurl');
-    $.log(
-`[${$.name}]获取addReadTimeurl成功✔,addReadTimeurl: ${addReadTimeurl}`
-    );
-    $.msg($.name,"","[获取时长数据]成功✔")}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
