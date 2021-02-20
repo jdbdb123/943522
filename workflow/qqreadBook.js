@@ -311,8 +311,7 @@ function qqreadtask() {
           `【${sp.title}】:${sp.amount}金币,${sp.actionText}\n` +
           `【宝箱任务${task.data.treasureBox.count + 1}】:${
             task.data.treasureBox.tipText
-          }\n` +
-          `【${task.data.fans.title}】:${task.data.fans.fansCount}个好友,${task.data.fans.todayAmount}金币\n`;
+          }\n`
       }
 
       kz +=
