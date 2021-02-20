@@ -16,40 +16,71 @@ let tz = '';
 let cash = $.getval('cash') || 0; //0为不自动提现,1为自动提现1元,5为自动提现1元,
 
 const userheaderArr = [];
-let userheaderVal = process.env.USERHEADERVAL;
+let userheaderVal ="";
 let USERHEADER = [];
 
 const userkeyArr = [];
-let userkeyVal = process.env.USERKEYVAL;
+let userkeyVal = "";
 let USERKEY = [];
 
 const signheaderArr = [];
-let signheaderVal = process.env.SIGNHEADERVAL;
+let signheaderVal = "";
 let SINGHEADER = [];
 
 const signkeyArr = [];
-let signkeyVal = process.env.SIGNKEYVAL;
+let signkeyVal = "";
 let SINGKEY = [];
 
 const taskheaderArr = [];
-let taskheaderVal = process.env.TASKHEADERVAL;
+let taskheaderVal = "";
 let TASKHEADER = [];
 
 const taskkeyArr = [];
-let taskkeyVal = process.env.TASKKEYVAL;
+let taskkeyVal = "";
 let TASKKEY = [];
 
 const wxtaskkeyArr = [];
-let wxtaskkeyVal = process.env.WXTASKKEYVAL;
+let wxtaskkeyVal = "";
 let WXTASKKEY = [];
 
 const cowkeyArr = [];
-let cowkeyVal = process.env.COWKEYVAL;
+let cowkeyVal = "";
 let COWKEY = [];
 ////////////////////////////////////////////////////////////////////
 
 
 if ($.isNode()) {
+  if (process.env.USERHEADERVAL) {
+	userheaderVal = process.env.USERHEADERVAL;
+}
+
+  if (process.env.USERKEYVAL) {
+	userkeyVal = process.env.USERKEYVAL;
+}
+  
+  if (process.env.SIGNHEADERVAL) {
+	 signheaderVal = process.env.SIGNHEADERVAL;
+}
+  
+  if (process.env.SIGNKEYVAL) {
+	 signkeyVal = process.env.SIGNKEYVAL;
+}
+  
+  if (process.env.TASKHEADERVAL) {
+	 taskheaderVal = process.env.TASKHEADERVAL;
+}
+  
+  if (process.env.TASKKEYVAL) {
+	 taskkeyVal = process.env.TASKKEYVAL;
+}
+  if (process.env.WXTASKKEYVAL) {
+	 wxtaskkeyVal = process.env.WXTASKKEYVAL;
+}
+  if (process.env.COWKEYVAL) {
+	 cowkeyVal = process.env.COWKEYVAL;
+}
+  
+  
   Object.keys(userheaderVal).forEach((item) => {
     if (userheaderVal[item]) {
       userheaderArr.push(signheaderVal[item])
