@@ -32,7 +32,7 @@ jobs:
                   taskkeyVal: ${{ secrets.taskkeyVal }}
                   wxtaskkeyVal: ${{ secrets.wxtaskkeyVal }}
                   cashheaderVal: ${{ secrets.cashheaderVal }}
-                  cowkeyVal: ${{ secrets.cowkeyVal }}
+                  cowkeyVal: ${{ secrets.COWKEYVAL }}
                   
 
                   
