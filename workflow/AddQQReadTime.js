@@ -32,6 +32,9 @@ const noNolog=0;//1关闭系统通知,0打开系统通知.
 
 console.log(`\n============ 脚本执行时间(TM)：${new Date(new Date().getTime() + 0 * 60 * 60 * 1000).toLocaleString('zh', {hour12: false})}  =============\n`)
 
+$.setdata("https://mqqapi.reader.qq.com/mqq/red_packet/user/clock_in/page",'pagesignurl')
+
+$.setdata('{"ywsession":"o3ew3u62dinw47p72vcl2i7ljookcrki","Cookie":"ywguid=878628051;ywkey=ywqWiuvaviST;platform=ios;channel=mqqmina;mpVersion=1.9.1","Connection":"keep-alive","Content-Type":"application/json","Accept":"*/*","Host":"mqqapi.reader.qq.com","User-Agent":"QQ/8.3.0.608 CFNetwork/978.0.7 Darwin/18.7.0","Referer":"https://appservice.qq.com/1110657249/1.9.1/page-frame.html","Accept-Language":"zh-cn","Accept-Encoding":"br, gzip, deflate","mpversion":"1.9.1"}','pageheader')
 
 !(async () => {
   if (typeof $request != "undefined") {
