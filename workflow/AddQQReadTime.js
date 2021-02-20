@@ -1,9 +1,6 @@
 /*
 
- @github By DD-D1  
-
-
-
+ @𝐃𝐃
 
 */
 
@@ -32,12 +29,14 @@ const noNolog=0;//1关闭系统通知,0打开系统通知.
 
 console.log(`\n============ 脚本执行时间(TM)：${new Date(new Date().getTime() + 0 * 60 * 60 * 1000).toLocaleString('zh', {hour12: false})}  =============\n`)
 
+
+$.setdata("https://mqqapi.reader.qq.com/mqq/addReadTimeWithBid?scene=3001&refer=-1&bid=31823377&readTime=103905&read_type=0&conttype=1&read_status=0&chapter_info=%5B%7B%221%22%3A%7B%22readTime%22%3A103905%7D%7D%5D&sp=-1",'addReadTimesignurl');
 $.setdata("https://mqqapi.reader.qq.com/mqq/red_packet/user/clock_in/page",'pagesignurl')
-
 $.setdata('{"ywsession":"o3ew3u62dinw47p72vcl2i7ljookcrki","Cookie":"ywguid=878628051;ywkey=ywqWiuvaviST;platform=ios;channel=mqqmina;mpVersion=1.9.1","Connection":"keep-alive","Content-Type":"application/json","Accept":"*/*","Host":"mqqapi.reader.qq.com","User-Agent":"QQ/8.3.0.608 CFNetwork/978.0.7 Darwin/18.7.0","Referer":"https://appservice.qq.com/1110657249/1.9.1/page-frame.html","Accept-Language":"zh-cn","Accept-Encoding":"br, gzip, deflate","mpversion":"1.9.1"}','pageheader')
-
 !(async () => {
- 
+  if (typeof $request != "undefined") {
+    await qedssign()
+  } else {
     await initSign()
     await bookShelfInitSign()
     await fromGuidSign()
@@ -46,36 +45,10 @@ $.setdata('{"ywsession":"o3ew3u62dinw47p72vcl2i7ljookcrki","Cookie":"ywguid=8786
     await seconds1Sign()
     await seconds2Sign()
     await Msg()
-  
+  }
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
-
-
-
-
-
-
-function fromGuidSign() {
-  return new Promise((resolve) => {
-      let Url = {
-        url :  "https://mqqapi.reader.qq.com/mqq/red_packet/user/page?fromGuid=",
-        headers : JSON.parse($.getdata('pageheader')),
-     
-      }
-      $.get(Url, async (err, resp, data) => {
-        try {
-          data = JSON.parse(data);
-          if(logs==1)console.log(data)
-          $.fromGuid = data;
-        } catch (e) {
-          $.logErr(e, resp);
-        } finally {
-          resolve()
-        }
-      })
-  })
-}
 
 
 
@@ -151,6 +124,8 @@ function initSign() {
 }
 
 
+
+
 function secondsSign() {
   return new Promise((resolve) => {
       let Url = {
@@ -222,12 +197,12 @@ function seconds2Sign(timeout=5000) {
 
 
 
+
 function Msg() {
   let dd = ""
 
 if ($.init.code == 0) 
 dd +="【账户信息昵称】"+$.init.data.user.nickName+"\n";
-
 
 
 if ($.bookShelfInit.code == 0)
@@ -251,10 +226,39 @@ dd+="【阅读30分钟奖励】"+"✅获得"+$.secondss.data.amount+"💰金币\
 
 
 
+if ($.fromGuid.code == 0)
+dd+="【账号信息查询】"+"当前账号"+$.fromGuid.data.user.amount+"💰金币"+",折合人民币"+(Number($.fromGuid.data.user.amount)/10000).toFixed(2) +"元\n";
+
+  
+
 if(log==1)console.log(dd)
 
  if(noNolog==0)$.msg($.name,"",dd)
 }
+
+
+
+function qedssign() {
+  if ($request.url.indexOf("clock_in/page") > -1) {
+
+  
+    $.log(
+`[${$.name}]获取pageHeader成功✔,pageHeader: ${pageHeader}`
+    );  
+    $.msg($.name,"","[获取签到数据]成功✔")}
+
+else
+if ($request.url.indexOf("addReadTimeWithBid?") > -1) {
+
+    $.log(
+`[${$.name}]获取addReadTimeurl成功✔,addReadTimeurl: ${addReadTimeurl}`
+    );
+    $.msg($.name,"","[获取时长数据]成功✔")}
+
+}
+
+
+
 
 
 
