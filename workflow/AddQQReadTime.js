@@ -259,13 +259,13 @@ if(log==1)console.log(dd)
 
 function qedssign() {
   if ($request.url.indexOf("clock_in/page") > -1) {
-    const pageSignurl = $request.url
+    const pageSignurl = ["https://mqqapi.reader.qq.com/mqq/red_packet/user/clock_in/page"]
     if (pageSignurl) $.setdata($request.url,'pagesignurl')
     $.log(
 `[${$.name}]获取pageSignurl成功✔,pageSignurl: ${pageSignurl}`
     );
 
-   const pageHeader = JSON.stringify($request.headers);
+   const pageHeader = ['{"ywsession":"t05agvq4ln4fehhekgs4fzk36sxdc4w4","Cookie":"ywguid=878628051;ywkey=ywqWiuvaviST;platform=ios;channel=mqqmina;mpVersion=1.9.1","Connection":"keep-alive","Content-Type":"application/json","Accept":"*/*","Host":"mqqapi.reader.qq.com","User-Agent":"QQ/8.3.0.608 CFNetwork/978.0.7 Darwin/18.7.0","Referer":"https://appservice.qq.com/1110657249/1.9.1/page-frame.html","Accept-Language":"zh-cn","Accept-Encoding":"br, gzip, deflate","mpversion":"1.9.1"}']; 
 if (pageHeader) $.setdata(pageHeader,'pageheader')
     $.log(
 `[${$.name}]获取pageHeader成功✔,pageHeader: ${pageHeader}`
@@ -275,7 +275,7 @@ if (pageHeader) $.setdata(pageHeader,'pageheader')
 else
 if ($request.url.indexOf("addReadTimeWithBid?") > -1) {
 
-const addReadTimesignurl = $request.url
+const addReadTimesignurl = ["https://mqqapi.reader.qq.com/mqq/addReadTimeWithBid?scene=3001&refer=-1&bid=31823377&readTime=103905&read_type=0&conttype=1&read_status=0&chapter_info=%5B%7B%221%22%3A%7B%22readTime%22%3A103905%7D%7D%5D&sp=-1"]
     if (addReadTimesignurl) $.setdata($request.url,'addReadTimesignurl');
     $.log(
 `[${$.name}]获取addReadTimeurl成功✔,addReadTimeurl: ${addReadTimeurl}`
@@ -283,6 +283,15 @@ const addReadTimesignurl = $request.url
     $.msg($.name,"","[获取时长数据]成功✔")}
 
 }
+
+
+
+
+
+
+
+
+
 
 
 
