@@ -1,20 +1,5 @@
 /*
-软件名称:宝石星球
-下载链接http://www.baoshixingqiu.com/i20200424?key=2527552
-练手的，一天一毛。。
-boxjs自己找。。
-点收取矿石获取数据
-
-重写
-
-https://interface.baoshixingqiu.com/member/user/batch-diggle url script-request-header https://raw.githubusercontent.com/age174/-/main/baosxq.js
-
-mitm
-
-interface.baoshixingqiu.com
-
-
-
+@github  By age174
 */
 const $ = new Env('宝石星球');
 let status;
