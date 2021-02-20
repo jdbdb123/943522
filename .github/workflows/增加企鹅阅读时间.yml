@@ -3,7 +3,7 @@ name: 增加企鹅读书时长
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 11-12 * * *'
+    - cron: '*/5 13-14 * * *'
   watch:
     types: conghua
   repository_dispatch:
