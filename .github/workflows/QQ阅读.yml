@@ -26,11 +26,11 @@ jobs:
         with:
           node-version: 12.x
       - name: npm install
-        if: env.QQ_QQreadURL
+        if: env.QQreadurlVal
         run: |
           npm install
       - name: '运行 【QQ阅读】'
-        if: env.QQ_QQreadURL
+        if: env.QQreadurlVal
         run: |
           node workflow/QQread.js
         env:
