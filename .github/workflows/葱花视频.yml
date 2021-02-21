@@ -38,7 +38,7 @@ jobs:
 
       - name: '运行 【葱花视频】'
         run: |
-          cd ~/MySelfActions/workflow/LocalCookie/
+          cd ~/MySelfActions/workflow/LocalCookie
           node CongHuaVideo.js
         env:
           TZ: Asia/shanghai
