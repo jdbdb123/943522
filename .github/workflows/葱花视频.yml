@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/Xin-Qiang/TaskActions.git ~/TaskActions
+          git clone https://github.com/Xin-Qiang/MySelfActions.git ~/MySelfActions
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -38,7 +38,7 @@ jobs:
 
       - name: '运行 【葱花视频】'
         run: |
-          cd ~/TaskActions/workflow
+          cd ~/MySelfActions/workflow/LocalCookie/
           node CongHuaVideo.js
         env:
           TZ: Asia/shanghai
