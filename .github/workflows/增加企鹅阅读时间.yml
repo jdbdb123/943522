@@ -3,7 +3,7 @@ name: 增加企鹅读书时长
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 13-16 * * *'
+    - cron: '*/5 1-3 * * *'
   watch:
     types: started
   repository_dispatch:
