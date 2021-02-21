@@ -34,6 +34,7 @@ jobs:
         run: |
           node workflow/QQread.js
         env:
+          QQ_QQreadURL: ${{ secrets.QQ_QQreadURL }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK: ${{ secrets.BARK }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
