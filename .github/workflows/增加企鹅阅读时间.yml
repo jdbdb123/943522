@@ -34,7 +34,7 @@ jobs:
           npm install
       - name: '运行 【增加QQ阅读时长】'
         run: |
-          cd ~/MySelfActions/workflow
+          cd ~/MySelfActions/workflow/LocalCookie
           node AddQQReadTime.js
         env:
           TZ: Asia/shanghai
