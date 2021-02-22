@@ -24,11 +24,11 @@ jobs:
         run: |
           node workflow/dkdVideo.js
         env:
-          DKDTOKENBODY: ${{ secrets.DKDTOKENBODY }}
-          DKDTOKEKEY: ${{ secrets.DKDTOKEKEY }}
-          DKDLOTTOURL: ${{ secrets.DKDLOTTOURL }}
-          DKDLOTTOURLKEY: ${{ secrets.DKDLOTTOURLKEY }}
-          DKDCASHURL: ${{ secrets.DKDCASHURL }}
-          DKDCASHKEY: ${{ secrets.DKDCASHKEY }}
-         #GETAWARDBODY: ${{ secrets.GETAWARDBODY }}
+           DKDURL: ${{ secrets.DKDURL }}
+           DKDHD: ${{ secrets.DKDHD }}
+           DKDBODY: ${{ secrets.DKDBODY }}
+           DKDTXURL: ${{ secrets.DKDTXURL }}
+           DKDTXHD: ${{ secrets.DKDTXHD }}
+           DKDTXBODY: ${{ secrets.DKDTXBODY }}
+           PUSH_KEY: ${{ secrets.PUSH_KEY }}
 
