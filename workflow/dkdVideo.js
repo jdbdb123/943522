@@ -72,14 +72,14 @@ Object.keys(getawardbodyVal).forEach((item) => {
 
 
 if ($.isNode()) {
-
+bodys='';
  dkdtokenbodyVal = process.env.DKDTOKENBODY;
  dkdtokenkeyVal = process.env.DKDTOKEKEY;
  dkdlottourlVal = process.env.DKDLOTTOURL;
  dkdlottourlVal = process.env.DKDLOTTOURLKEY;
  dkdcashurlVal = process.env.DKDCASHURL;
  dkdcashkeyVal = process.env.DKDCASHKEY;         
- getawardbodyVal = process.env.GETAWARDBODY;
+// getawardbodyVal = process.env.GETAWARDBODY;
 
 
 
