@@ -27,7 +27,7 @@ if ($.isNode()) {
    fqkkhdArr = process.env.FQKK_HD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   fqkkhdArr = process.env.FQKK_HD.split()
+   fqkkhdArr = process.env.FQKK_HD.split();
   };
 
 	
