@@ -1,14 +1,13 @@
 const $ = new Env('番茄看看自动阅读');
 let status;
 status = (status = ($.getval("fqkkstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-let fqkkurlArr = [], fqkkhdArr = [],fqkkbodyArr = [],fqkkcount = ''
+const fqkkurlArr = [], fqkkhdArr = [],fqkkbodyArr = [],fqkkcount = ''
 let fqkkurl = $.getdata('fqkkurl')
 let fqkkhd = $.getdata('fqkkhd')
 let fqkey = ''
 let fqkkxh = ($.getval('fqkkxh') || '25');  // 此处修改循环次数，默认一百
 let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.1元等于10，默认为提现一元，也就是100
 var zz = ''
-
 if ($.isNode()) {
    if (process.env.FQKK_URL && process.env.FQKK_URL.indexOf('#') > -1) {
    fqkkurlArr = process.env.FQKK_URL.split('#');
@@ -30,32 +29,7 @@ if ($.isNode()) {
   } else {
    fqkkhdArr = process.env.FQKK_HD.split()
   };
-/*  if (process.env.RLBODY && process.env.RLBODY.indexOf('#') > -1) {
-   rlbody = process.env.RLBODY.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.RLBODY && process.env.RLBODY.indexOf('\n') > -1) {
-   rlbody = process.env.RLBODY.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   rlbody = process.env.RLBODY.split()
-  };*/
-	
- /*  Object.keys(rlurl).forEach((item) => {
-        if (rlurl[item]) {
-          rlurlArr.push(rlurl[item])
-        }
-    });
-    Object.keys(rlheader).forEach((item) => {
-        if (rlheader[item]) {
-          rlheaderArr.push(rlheader[item])
-        }
-    });  	
-    Object.keys(rlbody).forEach((item) => {
-        if (rlbody[item]) {
-          rlbodyArr.push(rlbody[item])
-        }
-    });  */
+
 	
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
@@ -70,9 +44,15 @@ if ($.isNode()) {
 }
 
 !(async () => {
-if (!fqkkhdArr[0]) {
-    $.msg($.name, '【提示】请先获取番茄看看一cookie')
-    return;
+  if (typeof $request !== "undefined") {
+    await fqkkck()
+   
+  } else {fqkkurlArr.push($.getdata('fqkkurl'))
+    fqkkhdArr.push($.getdata('fqkkhd'))
+    let fqkkcount = ($.getval('fqkkcount') || '1');
+  for (let i = 2; i <= fqkkcount; i++) {
+    fqkkurlArr.push($.getdata(`fqkkurl${i}`))
+    fqkkhdArr.push($.getdata(`fqkkhd${i}`))
   }
     console.log(`------------- 共${fqkkhdArr.length}个账号-------------\n`)
       for (let i = 0; i < fqkkhdArr.length; i++) {
@@ -87,12 +67,13 @@ if (!fqkkhdArr[0]) {
       console.log(`\n番茄看看开始执行第${x+1}次阅读任务！💦\n`)
     await fqkk1();
 if(zz==1){
-$.msg("","",'番茄看看任务异常，请查看脚本运行日志查看情况!')
-break;
+console.log('番茄看看任务异常，请查看脚本运行日志查看情况!')
 }
-  }
+  }if(zz==1){
+$.msg($.name,'','番茄看看任务异常，请查看脚本运行日志查看情况!')
+}
   await fqkktx();
-}}
+}}}
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
@@ -123,11 +104,11 @@ let url = {
            
     const result = JSON.parse(data)
         if(result.code == 0){
-        console.log('\n番茄看看领取阅读奖励回执:成功🌝 '+result.msg)
+        console.log('\n番茄看看领取阅读奖励回执:成功🌝 '+result.msg+'\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)
 }
-if(result.code == 502 || result.code == 550 || result.code == 413 || resule.code == 600){
+if(result.code !== 0){
 
-       console.log('\n番茄看看领取阅读奖励回执:失败🚫 '+result.msg)
+       console.log('\n番茄看看领取阅读奖励回执:失败🚫 '+result.msg+'\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)
 zz = 1
 }
    
@@ -150,12 +131,16 @@ let url = {
 }      
       $.post(url, async (err, resp, data) => {
         try {
+        if (err) {
+          console.log("⛔️API查询请求失败❌ ‼️‼️");
+          console.log(JSON.stringify(err));
+          $.logErr(err);
+        } else {
            
     const result = JSON.parse(data)
        console.log('\n番茄看看key提交成功,即将开始领取阅读奖励')       
-       await $.wait(8000);
-        await fqkk3();
-        } catch (e) {
+       
+        }} catch (e) {
           //$.logErr(e, resp);
         } finally {
           resolve()
@@ -166,15 +151,14 @@ let url = {
 
 
 
-
 //番茄看看key
 function fqkk1(timeout = 0) {
   return new Promise((resolve) => {
-/*    setTimeout( ()=>{
+    setTimeout( ()=>{
       if (typeof $.getdata('fqkkhd') === "undefined") {
         $.msg($.name,"",'请先获取番茄看看数据!😓',)
         $.done()
-      }*/
+      }
 let url = {
         url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/reada/getTask",
         headers : JSON.parse(fqkkhd),
@@ -187,11 +171,11 @@ let url = {
         console.log('\n番茄看看获取key回执:成功🌝 ')
         fqkey = result.data.jkey
         console.log(fqkey)
-        await $.wait(1000);
         await fqkk2()
-}
-if(result.code == 401){
-        $.msg('','','番茄看看获取key回执:失败🚫 '+result.msg+'请重新获取数据。')
+}       await $.wait(15000);
+        await fqkk3();   
+if(result.code !== 0){
+console.log('番茄看看获取key回执:失败🚫 '+result.msg)
 
 }
         } catch (e) {
@@ -199,7 +183,7 @@ if(result.code == 401){
         } finally {
           resolve()
         }
-//      })
+      })
     },timeout)
   })
 }
@@ -219,7 +203,7 @@ let url = {
         if(result.code == 0){
         console.log('\n番茄看看提现回执:成功🌝 ')
 }
-if(result.code == 502 || result.code == 505 || result.code == 413 || result.code == 501){
+if(result.code !== 0){
 
        console.log('\n番茄看看提现回执:失败🚫 '+result.msg)
 }
