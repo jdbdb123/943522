@@ -108,9 +108,9 @@ $.begin = indexLast ? parseInt(indexLast, 10) : 1;
 
   callbackurlArr.push('https://task.youth.cn/count2/callback?si=b2e5548bd550d7a592dbcac3e8fd7216&_=1613483324962&jsonpcallback=jsonp5');
   callbackkeyArr.push('{"Cookie":"game_home_YOUTH_ARTICLE=MDAwMDAwMDAwMJCMpN-w09Wtg599b36dnad-z6bdgp153bCarayx3YVthIyGma65qqp9n6izhJp2Zn7Tg8yCZoGcrqutaKzQfbKRjIqXr6nJnI55iWqCd4JjjrmHmICghs-6Y6qcsJWJbZGlhpmuz6ZlfZ-ocg; Hm_lpvt_43f07e50f9738318fa872f35b04004c9=1613483311; Hm_lvt_43f07e50f9738318fa872f35b04004c9=1613483311; game_home_TOKEN_ID=2021021621483046186688","Accept":"*/*","Connection":"keep-alive","Referer":"https://task.youth.cn/video/share?id=1485967&uid=338257&signature=6ORGApNwlQy9EDxrWZz4mzDMqIOyEl2kJdK5m1LPMVvga7B0Ye&share_wap=wx&time=1613483286973&share_id=338257_1485967_1613483286973","Accept-Encoding":"br, gzip, deflate","Host":"task.youth.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.14(0x17000e20) NetType/4G Language/zh_CN","Accept-Language":"zh-cn"}');
-//   提现请求未加
-//   cashkeyArr.push('');
-//   callbackurlArr.push('');
+  cashkeyArr.push('{"Accept":"*/*","Content-Type":"application/x-www-form-urlencoded","Connection":"keep-alive","Host":"app.kxp.com","User-Agent":"cong hua shi pin/1.4.6 (iPhone; iOS 12.4; Scale/2.00)","Accept-Language":"zh-Hans-CN;q=1, en-US;q=0.9","Accept-Encoding":"br, gzip, deflate","Content-Length":"830"}');
+
+  cashbodylArr.push('p=9NwGV8Ov71o%3D-HJ-gLW322pnxR0tzrq_mjar53Cul3jzpIdRPjqDJsb14rJnU-kxp5zG2RLtSouyLBZf1aWPx6Vppd6dAxuGtatcuyfXq6lq8Umeg8pdkZu7J98EeHav_GkGI8L4mz3kmFOW-rMw5LP0zVA6tO4S1Rt9NOvgy2mMheZvUvcqTWfjMgleND87fBmzT5rKrwj4UpHLkOoiyiRSdXoOA96gTZylfedJoZtdeQN8IxS8fUBftnw8NnVi55C-z1J1PFo6serSMtiR86yis2wDw78MNqpwh1XimU1_dtCeI4WaOrmv44oupWnHF0vACrywd0Whr9BWGHr6VPtmwVj5YKBL_9_MJ6RlnBHArcvmkFBOwwIcCUgMzdbivpUpI75fJwbQxDqS6zRO9ClZkmAAI0Vld3kId3AI24HQne0UP-70dliJpYxp2HjBiVO2lqVcYYopnHSF8n6RxGZlDJphcN-GZsw2mdqhsF8AYWnLrvoN0ie9yJ1R0OV5ipe3pXZQCzqXcNSnf7gsyVVM26C9SorDKHMHRRxqHI3yxm3QUNeAKlJUEdWbFVVzTKr5fk9V1HCNeGrhQNq6lxsWk-4eZZzV2_R46bYNKnh2ntrlWcswM84ka-uOCMq4Z-ODIWCG1tu465E4UDfUXos_ZI_ECEs2dV8M4zOuQBBIt85_270m252jW3oyCTc9LYL0XfqYoSiaaqpYq3sUHbM2SBtMdx_RL0xqVzJAFmza9AmUkSR3h8Sb_0blrsvKhChX0if9bzdYfrV9zKrU-mxwDtZ9_Ke0J46UDNQFPOdX8xh_8MYq1CI%3D');
   }
 
 if (!(bodys && bodys != '')) {
