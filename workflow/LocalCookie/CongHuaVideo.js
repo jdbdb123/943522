@@ -43,11 +43,11 @@ if ($.isNode()) {
 async function showmsg() {
   if (notifyInterval == 1) {
     if ($.isNode()) {
-      if ((hour == 0 && minute <= 12) || (hour == 4 && minute <= 20) || (hour == 15 && minute <= 20)) {
+      if ((hour == 0 && minute <= 30) || (hour == 4 && minute <= 30) || (hour == 15 && minute <= 30)) {
         await notify.sendNotify($.name, tz)
       }
     } else {
-      if ((hour == 0 && minute <= 12) || (hour == 4 && minute <= 20) || (hour == 15 && minute <= 20)) {
+      if ((hour == 0 && minute <= 30) || (hour == 4 && minute <= 30) || (hour == 15 && minute <= 30)) {
         $.msg(msgstyle, '', tz);
       }
     }
@@ -222,12 +222,12 @@ if ($.isNode()) {
     );
   }
 
-  if (hour == 1 || hour == 3 || hour == 6) {
+  if (hour == 0 || hour == 4 || hour == 15) {
     await videoread(); //自动刷视频
-  }else if (hour == 4) {
+  }else if (hour == 13) {
     console.log(`\n✅ 执行自行助力任务`)
     await callback();
-  }else if (hour <= 10) {
+  }else if (hour <= 9) {
     console.log(`\n✅ 打印任务状态清单`)
     await taskcenter(); //任务中心
     console.log(`\n✅ 执行时段奖励任务`)
