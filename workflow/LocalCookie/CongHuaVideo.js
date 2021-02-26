@@ -224,7 +224,7 @@ if ($.isNode()) {
 
   if (hour == 0 || hour == 4 || hour == 15) {
     await videoread(); //自动刷视频
-  }else if (hour == 13) {
+  }else if (hour == 12) {
     console.log(`\n✅ 执行自行助力任务`)
     await callback();
   }else if (hour <= 9) {
