@@ -1,41 +1,14 @@
-/*
-tgchannel：https://t.me/ZhiYi_Script
-github：https://github.com/ZhiYi-N/script
-boxjs：https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/ZhiYi-N.boxjs.json
-转载留个名字，谢谢
-邀请码：190512
-谢谢
-作者：执意ZhiYi-N
-#看一个视频获取ck
-目前包含：
-看视频奖励、分享奖励
-点赞视频奖励、评论视频奖励（评论内容：真好哈）
-榜单投票、榜单抽奖
-[mitm]
-hostname = ranlv.lvfacn.com
-#圈x 
-[rewrite local]
-https://ranlv.lvfacn.com/api.php/Common/pvlog url script-request-header https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/ranlv.js
-
-
-#loon
-http-request https://ranlv.lvfacn.com/api.php/Common/pvlog script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/ranlv.js, requires-body=true, timeout=10, tag=燃旅视频
-
-
-#surge
-燃旅视频 = type=http-request,pattern=^https://ranlv.lvfacn.com/api.php/Common/pvlog,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/ranlv.js,script-update-interval=0
-
-*/
 const zhiyi = '燃旅视频'
 const $ = Env(zhiyi)
 const notify = $.isNode() ?require('./sendNotify') : '';
-let status, videoid,myid;
+let status, videoid,myid,supportvideoid,supportrank,show;
 status = (status = ($.getval("rlstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 const rlurlArr = [], rlheaderArr = [],rlbodyArr = []
 let rlurl = $.getdata('rlurl')
 let rlheader = $.getdata('rlheader')
 let rlbody = $.getdata('rlbody')
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
+let cash = ($.getval('rlcash') || '1')//默认不自动提现
 const invite=0;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
 var hour=''
@@ -47,16 +20,18 @@ if ($.isNode()) {
    hour = (new Date()).getHours();
    minute = (new Date()).getMinutes();
 }
+console.log(`现在时间为${hour}：${minute}\n`)
 //CK运行
 let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
    GetCookie();
    $.done()
-} 
+}
 if ($.isNode()) {
-   if (process.env.RLURL && process.env.RLURL.indexOf('#') > -1) {
-   rlurl = process.env.RLURL.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
+
+  if (process.env.RLURL && process.env.RLURL.indexOf('#') > -1) {
+  rlurl = process.env.RLURL.split('#');
+  console.log(`您选择的是用"#"隔开\n`)
   }
   else if (process.env.RLURL && process.env.RLURL.indexOf('\n') > -1) {
    rlurl = process.env.RLURL.split('\n');
@@ -64,6 +39,12 @@ if ($.isNode()) {
   } else {
    rlurl = process.env.RLURL.split()
   };
+  Object.keys(rlurl).forEach((item) => {
+        if (rlurl[item]) {
+          rlurlArr.push(rlurl[item])
+        }
+    });
+
   if (process.env.RLHEADER && process.env.RLHEADER.indexOf('#') > -1) {
    rlheader = process.env.RLHEADER.split('#');
    console.log(`您选择的是用"#"隔开\n`)
@@ -74,7 +55,13 @@ if ($.isNode()) {
   } else {
    rlheader = process.env.RLHEADER.split()
   };
-/*  if (process.env.RLBODY && process.env.RLBODY.indexOf('#') > -1) {
+  Object.keys(rlheader).forEach((item) => {
+        if (rlheader[item]) {
+          rlheaderArr.push(rlheader[item])
+        }
+    });
+
+  if (process.env.RLBODY && process.env.RLBODY.indexOf('#') > -1) {
    rlbody = process.env.RLBODY.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
@@ -83,24 +70,13 @@ if ($.isNode()) {
    console.log(`您选择的是用换行隔开\n`)
   } else {
    rlbody = process.env.RLBODY.split()
-  };*/
-	
-   Object.keys(rlurl).forEach((item) => {
-        if (rlurl[item]) {
-          rlurlArr.push(rlurl[item])
-        }
-    });
-    Object.keys(rlheader).forEach((item) => {
-        if (rlheader[item]) {
-          rlheaderArr.push(rlheader[item])
-        }
-    });  	
-/*    Object.keys(rlbody).forEach((item) => {
+  };
+  Object.keys(rlbody).forEach((item) => {
         if (rlbody[item]) {
           rlbodyArr.push(rlbody[item])
         }
-    });  */
-	
+    });
+
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
@@ -115,6 +91,7 @@ if ($.isNode()) {
   }
 }
 !(async () => {
+//if (!rlheaderArr[0] && !rlbodyArr[0] && !rlurlArr[0]) {
 if (!rlheaderArr[0]) {
     $.msg($.name, '【提示】请先获取燃旅视频一cookie')
     return;
@@ -126,7 +103,7 @@ if (!rlheaderArr[0]) {
       note =''
       rlurl = rlurlArr[i];
       rlheader = rlheaderArr[i];
-     // rlbody = rlbodyArr[i];
+      rlbody = rlbodyArr[i];
       $.index = i + 1;
       console.log(`\n开始【燃旅视频${$.index}】`)
       await checkVersion()
@@ -136,12 +113,13 @@ if (!rlheaderArr[0]) {
       await myVotes()
       await wiTask()
       await showmsg()
+
   }
  }
 })()
     .catch((e) => $.logErr(e))
-    .finally(() => $.done())  
-    
+    .finally(() => $.done())
+
 function GetCookie() {
 if($request&&$request.url.indexOf("Common/pvlog")>=0) {
    const rlurl = $request.url.split('?')[1]
@@ -176,10 +154,10 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  }  
+  }
 //index
 async function index(){
 let url = rlurl.replace(/&video_id=\d+/,'')
@@ -207,10 +185,10 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  }  
+  }
 //userinfo
 async function userinfo(){
 let url = rlurl.replace(/&video_id=\d+/,'')
@@ -230,6 +208,12 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
         myid = result.user.id
         console.log('🎈'+result.msg+' 邀请码：'+result.user.id+' 昵称：'+result.user.nickname+' 燃旅号：'+result.user.ranlvid +'\n')
         console.log('现有余额：'+result.user.balance + '提现额度：'+result.user.lines+'\n')
+        if(cash > 0 && Number(result.user.balance) >= cash && Number(result.user.lines) >= Number(result.user.balance)){
+          if(Number(result.user.balance) > 10 ){cash = 10}
+          else if(Number(result.user.balance) > 3 ){cash = 3}
+          else{cash = 1}
+          await wallet()
+        }
         message += '🎈'+result.msg+' 邀请码：'+result.user.id+' 昵称：'+result.user.nickname+' 燃旅号：'+result.user.ranlvid +'现有余额：'+result.user.balance + '提现额度：'+result.user.lines+'\n'
         }else{
         console.log('👀我也不知道\n')
@@ -239,7 +223,7 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
   }
@@ -277,7 +261,7 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
         await share()
         await video_info()
         await wxfx()
-        await share_rewards() 
+        await share_rewards()
         }
         let videoArr = result.data.task.find(item => item.id === 7)
         console.log('视频任务：'+videoArr.to_num+'/'+videoArr.num)
@@ -296,10 +280,10 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  }  
+  }
 //video_reward
 async function video_reward(){
 let url = rlurl.replace(/\d{5}$/,`${videoid}`)
@@ -325,10 +309,10 @@ let url = rlurl.replace(/\d{5}$/,`${videoid}`)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  }  
+  }
 //share
 async function share(){
 let url = rlurl.replace(/\d{5}$/,`${videoid}`)
@@ -349,10 +333,10 @@ let url = rlurl.replace(/\d{5}$/,`${videoid}`)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  } 
+  }
 //video_info
 async function video_info(){
 let accesstoken = rlurl.match(/access_token=\w{32}/)
@@ -370,7 +354,7 @@ let accesstoken = rlurl.match(/access_token=\w{32}/)
      "Origin": "http://ran.lvfacn.com",
      "Referer": `"http://ran.lvfacn.com/play.html?videoid=${videoid}&to_user_id=${myid}"`,
      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.2(0x1800022c) NetType/WIFI Language/zh_CN"
-     }, 	
+     },
      body: `${accesstoken}&video_id=${videoid}&member_id=0`
 }
    $.post(video_info_url,async(error, response, data) =>{
@@ -386,10 +370,10 @@ let accesstoken = rlurl.match(/access_token=\w{32}/)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  } 
+  }
 
 //wxfx
 async function wxfx(){
@@ -408,7 +392,7 @@ let accesstoken = rlurl.match(/access_token=\w{32}/)
      "Origin": "http://ran.lvfacn.com",
      "Referer": `"http://ran.lvfacn.com/play.html?videoid=${videoid}&to_user_id=${myid}"`,
      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.2(0x1800022c) NetType/WIFI Language/zh_CN"
-     }, 	
+     },
     	body: `${accesstoken}&url=http://ran.lvfacn.com/play.html?videoid=${videoid}&to_user_id=${myid}`
     	}
    $.post(wxfx_url,async(error, response, data) =>{
@@ -422,7 +406,7 @@ let accesstoken = rlurl.match(/access_token=\w{32}/)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -449,7 +433,7 @@ let accesstoken = rlurl.match(/access_token=\w{32}/)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
   }
@@ -483,7 +467,7 @@ async function wiTask(){
         await comment()
         }
         if(praiseArr.to_num >= praiseArr.num && commentArr.to_num >= commentArr.num && commentArr.to_num >= commentArr.num){
-        note += '提现任务已完成'
+        note += '提现状态获取成功'
         $.log(zhiyi,'',note)
         }
         }
@@ -491,7 +475,7 @@ async function wiTask(){
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
   }
@@ -519,10 +503,10 @@ let url = rlurl.replace(/\d{5}$/,`${videoid}`)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
-  } 
+  }
 //comment 10个随机
 async function comment(){
 let url = rlurl.replace(/\d{5}$/,`${videoid}`)
@@ -553,7 +537,7 @@ newcomment = commentarr[no]
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -611,7 +595,7 @@ let new_access_token = access_token.replace(/access_token=/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -643,7 +627,7 @@ let url = rlurl.replace(/&video_id=\d{5}/,``)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -671,7 +655,7 @@ let url = rlurl.replace(/\d{5}$/,`${supportvideoid}`)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -699,7 +683,7 @@ let url = rlurl.replace(/\d{5}$/,`${supportvideoid}`)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -742,7 +726,7 @@ let new_access_token = access_token.replace(/access_token=/,'')
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
     })
    })
 }
@@ -775,7 +759,79 @@ let url = rlurl.replace(/&video_id=\d{5}/,``)
           $.logErr(e, response);
       } finally {
         resolve();
-      } 
+      }
+    })
+   })
+}
+//withdraw
+async function withdraw(){
+let url = rlurl.replace(/&video_id=\d{5}/,``)
+ return new Promise((resolve) => {
+    let withdraw_url = {
+   		url: `https://ranlv.lvfacn.com/api.php/Share/withdraw?&amount=${cash}&is_act=1&member_id=${myid}&${url}`,
+    	headers: JSON.parse(rlheader),
+    	}
+   $.post(withdraw_url,async(error, response, data) =>{
+    try{
+        const result = JSON.parse(data)
+        if(logs) $.log(data)
+        if(result.code == 0){
+        console.log(`成功提现${cash}元\n`)
+        message += `成功提现${cash}元\n`
+        await notify.sendNotify('@提现啦@'+$.name,message+note)
+        }else{
+        console.log('👀'+result.msg+'\n')
+        }
+        }catch(e) {
+          $.logErr(e, response);
+      } finally {
+        resolve();
+      }
+    })
+   })
+}
+//wallet
+async function wallet(){
+let url = rlurl.replace(/&video_id=\d{5}/,``)
+ return new Promise((resolve) => {
+    let wallet_url = {
+   		url: `https://ranlv.lvfacn.com/api.php/Share/wallet?&&list_rows=1&page=1&type=2&member_id=${myid}&${url}`,
+    	headers: JSON.parse(rlheader),
+    	}
+   $.post(wallet_url,async(error, response, data) =>{
+    try{
+        $.log(`设置的金额为${cash}\n`)
+        const result = JSON.parse(data)
+        if(logs) $.log(data)
+        if(result.code == 0){
+        let hour,minute,second,year,month,day;
+year = (new Date()).getFullYear();
+month = (new Date()).getMonth() + 1;
+day = (new Date()).getDate();
+if (month >= 1 && month <= 9) {
+            month = "0" + month;
+    }
+if (day >= 0 && day <= 9) {
+            day = "0" + day;
+   }
+hour = (new Date()).getHours();
+minute = (new Date()).getMinutes();
+second = (new Date()).getSeconds();
+let now = Number(year+month+day+hour+minute+second)
+let cashArr = result.data.data.data.find(item => item.description === '提现')
+let create_time = Number(cashArr.serialnum.match(/\d{14}/))
+if(now - create_time >= 1000000){
+$.log(`设置的提现金额为${cash},开始提现\n`)
+await withdraw()
+}
+        }else{
+        console.log('👀'+result.msg+'\n')
+        }
+        }catch(e) {
+          $.logErr(e, response);
+      } finally {
+        resolve();
+      }
     })
    })
 }
@@ -801,7 +857,7 @@ async function showmsg(){
 if(tz==1){
     $.log(message+note)
     if ($.isNode()){
-    if ((hour == 12 && minute <= 20) || (hour == 23 && minute >= 40)) {
+    if (hour == 23) {
        await notify.sendNotify($.name,message+note)
      }
    }else{
