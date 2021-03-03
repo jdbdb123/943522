@@ -12,55 +12,55 @@ let min = 10;
 
 
 if ($.isNode()) {
-  if (process.env.YSMURL && process.env.YSMURL.indexOf('#') > -1) {
-   ysmurlArr = process.env.YSMURL.split('#');
+  if (process.env.YSM_URL && process.env.YSM_URL.indexOf('#') > -1) {
+   ysmurlArr = process.env.YSM_URL.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.YSMURL && process.env.YSMURL.indexOf('\n') > -1) {
-   ysmurlArr = process.env.YSMURL.split('\n');
+  else if (process.env.YSM_URL && process.env.YSM_URL.indexOf('\n') > -1) {
+   ysmurlArr = process.env.YSM_URL.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ysmurlArr = process.env.YSMURL.split()
+   ysmurlArr = process.env.YSM_URL.split()
   };
-  if (process.env.YSMHD && process.env.YSMHD.indexOf('#') > -1) {
-   ysmhdArr = process.env.YSMHD.split('#');
+  if (process.env.YSM_HD && process.env.YSM_HD.indexOf('#') > -1) {
+   ysmhdArr = process.env.YSM_HD.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.YSMHD && process.env.YSMHD.indexOf('\n') > -1) {
-   ysmhdArr = process.env.YSMHD.split('\n');
+  else if (process.env.YSM_HD && process.env.YSM_HD.indexOf('\n') > -1) {
+   ysmhdArr = process.env.YSM_HD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ysmhdArr = process.env.YSMHD.split()
+   ysmhdArr = process.env.YSM_HD.split()
   };
-  if (process.env.YSMBODY && process.env.YSMBODY.indexOf('#') > -1) {
-   ysmbodyArr = process.env.YSMBODY.split('#');
+  if (process.env.YSM_BD && process.env.YSM_BD.indexOf('#') > -1) {
+   ysmbodyArr = process.env.YSM_BD.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.YSMBODY && process.env.YSMBODY.indexOf('\n') > -1) {
-   ysmbodyArr = process.env.YSMBODY.split('\n');
+  else if (process.env.YSM_BD && process.env.YSM_BD.indexOf('\n') > -1) {
+   ysmbodyArr = process.env.YSM_BD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ysmbodyArr = process.env.YSMBODY.split()
+   ysmbodyArr = process.env.YSM_BD.split()
   };
-  if (process.env.YSM2BODY && process.env.YSM2BODY.indexOf('#') > -1) {
-   ysm2bodyArr = process.env.YSM2BODY.split('#');
+  if (process.env.YSM2_BD && process.env.YSM2_BD.indexOf('#') > -1) {
+   ysm2bodyArr = process.env.YSM2_BD.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.YSM2BODY && process.env.YSM2BODY.indexOf('\n') > -1) {
-   ysm2bodyArr = process.env.YSM2BODY.split('\n');
+  else if (process.env.YSM2_BD && process.env.YSM2_BD.indexOf('\n') > -1) {
+   ysm2bodyArr = process.env.YSM2_BD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ysm2bodyArr = process.env.YSM2BODY.split()
+   ysm2bodyArr = process.env.YSM2_BD.split()
   };
-  if (process.env.YSMTX && process.env.YSMTX.indexOf('#') > -1) {
-   ysmtxArr = process.env.YSMTX.split('#');
+  if (process.env.YSM_TX && process.env.YSM_TX.indexOf('#') > -1) {
+   ysmtxArr = process.env.YSM_TX.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.YSMTX && process.env.YSMTX.indexOf('\n') > -1) {
-   ysmtxArr = process.env.YSMTX.split('\n');
+  else if (process.env.YSM_TX && process.env.YSM_TX.indexOf('\n') > -1) {
+   ysmtxArr = process.env.YSM_TX.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ysmtxArr = process.env.YSMTX.split()
+   ysmtxArr = process.env.YSM_TX.split()
   };
 
   console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
