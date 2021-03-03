@@ -9,6 +9,63 @@ let ysm2body = $.getdata('ysm2body')
 let ysmtx = $.getdata('ysmtx')
 let ysmkey = ''
 
+if ($.isNode()) {
+   if (process.env.YSM_URL && process.env.YSM_URL.indexOf('#') > -1) {
+   ysmurlArr = process.env.YSM_URL.split('#');
+   console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.YSM_URL && process.env.YSM_URL.indexOf('\n') > -1) {
+   ysmurlArr = process.env.YSM_URL.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   ysmurlArr = process.env.YSM_URL.split()
+  };
+  if (process.env.YSM_HD && process.env.YSM_HD.indexOf('#') > -1) {
+   ysmhdArr = process.env.YSM_HD.split('#');
+   console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.YSM_HD && process.env.YSM_HD.indexOf('\n') > -1) {
+   ysmhdArr = process.env.YSM_HD.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   ysmhdArr = process.env.YSM_HD.split()
+  };
+  if (process.env.YSM_BD && process.env.YSM_BD.indexOf('#') > -1) {
+   ysmbodyArr = process.env.YSM_BD.split('#');
+   console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.YSM_BD && process.env.YSM_BD.indexOf('\n') > -1) {
+   ysmbodyArr = process.env.YSM_BD.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   ysmbodyArr = process.env.YSM_BD.split()
+  };	
+  if (process.env.YSM2_BD && process.env.YSM2_BD.indexOf('#') > -1) {
+   ysm2bodyArr = process.env.YSM2_BD.split('#');
+   console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.YSM2_BD && process.env.YSM2_BD.indexOf('\n') > -1) {
+   ysm2bodyArr = process.env.YSM2_BD.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   ysm2bodyArr = process.env.YSM2_BD.split()
+  };		
+	
+
+    console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
+    console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
+ } else {ysmurlArr.push($.getdata('ysmurl'))
+    ysmhdArr.push($.getdata('ysmhd'))
+    ysmbodyArr.push($.getdata('ysmbody'))
+    ysm2bodyArr.push($.getdata('ysm2body'))
+    let ysmcount = ($.getval('ysmcount') || '1');
+  for (let i = 2; i <= ysmcount; i++) {
+    ysmurlArr.push($.getdata(`ysmurl${i}`))
+    ysmhdArr.push($.getdata(`ysmhd${i}`))
+    ysmbodyArr.push($.getdata(`ysmbody${i}`))
+    ysm2bodyArr.push($.getdata(`ysm2body${i}`))
+  }
+}
 
 !(async () => {
   if (typeof $request !== "undefined") {
