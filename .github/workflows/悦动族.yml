@@ -1,0 +1,36 @@
+name: 悦动族
+
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '0,30 0-13,22-23 * * *'
+  watch:
+    types: started
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    env:
+        YDZ_yuedongzuTOKEN: ${{ secrets.YDZ_yuedongzuTOKEN }}
+        TZ: Asia/shanghai
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: |
+          npm install
+      - name: '运行 【悦动族】'
+        if: env.YDZ_yuedongzuTOKEN
+        run: |
+          node workflow/yuedongzu.js
+        env:
+          PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
