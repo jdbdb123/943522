@@ -28,7 +28,7 @@ jobs:
       - name: '运行 【悬赏猫猫】'
         if: env.XSMM_HD
         run: |
-          node task/XSCat.js
+          node workflow/XSCat.js
         env:
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN}}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
