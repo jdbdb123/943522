@@ -1,12 +1,14 @@
 const $ = new Env('番茄看看自动阅读');
 let status;
 status = (status = ($.getval("fqkkstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-const fqkkurlArr = [], fqkkhdArr = [],fqkkbodyArr = [],fqkkcount = ''
+let fqkkurlArr = [], fqkkhdArr = [],fqkkbodyArr = [],fqkkcount = ''
 let fqkkurl = $.getdata('fqkkurl')
 let fqkkhd = $.getdata('fqkkhd')
 let fqkey = ''
-let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.3元等于30，默认为提现一元，也就是100
-let fqjs = 1
+let fqkkxh = ($.getval('fqkkxh') || '20');  // 此处修改循环次数，默认一百
+let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.1元等于10，默认为提现一元，也就是100
+let max = 180
+let min = 37
 
 if ($.isNode()) {
    if (process.env.FQKK_URL && process.env.FQKK_URL.indexOf('#') > -1) {
@@ -29,7 +31,32 @@ if ($.isNode()) {
   } else {
    fqkkhdArr = process.env.FQKK_HD.split()
   };
-
+/*  if (process.env.RLBODY && process.env.RLBODY.indexOf('#') > -1) {
+   rlbody = process.env.RLBODY.split('#');
+   console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.RLBODY && process.env.RLBODY.indexOf('\n') > -1) {
+   rlbody = process.env.RLBODY.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   rlbody = process.env.RLBODY.split()
+  };*/
+	
+ /*  Object.keys(rlurl).forEach((item) => {
+        if (rlurl[item]) {
+          rlurlArr.push(rlurl[item])
+        }
+    });
+    Object.keys(rlheader).forEach((item) => {
+        if (rlheader[item]) {
+          rlheaderArr.push(rlheader[item])
+        }
+    });  	
+    Object.keys(rlbody).forEach((item) => {
+        if (rlbody[item]) {
+          rlbodyArr.push(rlbody[item])
+        }
+    });  */
 	
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
@@ -44,15 +71,9 @@ if ($.isNode()) {
 }
 
 !(async () => {
-  if (typeof $request !== "undefined") {
-    await fqkkck()
-   
-  } else {fqkkurlArr.push($.getdata('fqkkurl'))
-    fqkkhdArr.push($.getdata('fqkkhd'))
-    let fqkkcount = ($.getval('fqkkcount') || '1');
-  for (let i = 2; i <= fqkkcount; i++) {
-    fqkkurlArr.push($.getdata(`fqkkurl${i}`))
-    fqkkhdArr.push($.getdata(`fqkkhd${i}`))
+if (!fqkkhdArr[0]) {
+    $.msg($.name, '【提示】请先获取番茄看看一cookie')
+    return;
   }
     console.log(`------------- 共${fqkkhdArr.length}个账号-------------\n`)
     console.log('\n番茄看看当前设置的提现金额为: '+fqtx / 100 + ' 元')
@@ -63,12 +84,12 @@ if ($.isNode()) {
           fqkkhd = fqkkhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【番茄看看${$.index}】`)
+
     await fqkk1();
 
   }
-  await fqkktx();
-}}
-
+    await fqkktx();
+}
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
@@ -91,7 +112,7 @@ $.log(fqkkhd)
 function fqkk3(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/reada/finishTask",
+        url : "http://m."+fqkkurl.match(/m.(.*?)reada/)[1]+"reada/finishTask",
         headers : JSON.parse(fqkkhd),
         body : 'readLastKey='+fqkey,}
       $.post(url, async (err, resp, data) => {
@@ -100,6 +121,8 @@ let url = {
     const result = JSON.parse(data)
         if(result.code == 0){
         console.log('\n番茄看看领取阅读奖励回执:成功🌝 '+result.msg+'\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)
+        await $.wait(1000);
+	await fqkk1();
 } else {
        console.log('\n番茄看看领取阅读奖励回执:失败🚫 '+result.msg+'\n今日阅读次数: '+result.data.infoView.num+' 今日阅读奖励: '+result.data.infoView.score)
 }
@@ -117,7 +140,7 @@ let url = {
 function fqkk2(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/reada/jump?key="+fqkey,
+        url : "http://m."+fqkkurl.match(/m.(.*?)reada/)[1]+"reada/jump?key="+fqkey,
         headers : JSON.parse(fqkkhd),
        
 }      
@@ -130,8 +153,11 @@ let url = {
            
     //const result = JSON.parse(data)
        console.log('\n番茄看看key提交成功,即将开始领取阅读奖励') 
-       
-        await $.wait(10000);
+	await fqread();
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+	await $.wait(random);       
+       // await $.wait(15000);
         await fqkk3(); 
        
         }} catch (e) {
@@ -148,13 +174,16 @@ let url = {
 //番茄看看key
 function fqkk1(timeout = 0) {
   return new Promise((resolve) => {
-    setTimeout( ()=>{
+/*    setTimeout( ()=>{
       if (typeof $.getdata('fqkkhd') === "undefined") {
         $.msg($.name,"",'请先获取番茄看看数据!😓',)
         $.done()
-      }
+      }  */
+let fqjs = 1
+//console.log(fqkkurl.match(/m.(.*?)reada/)[1])
+
 let url = {
-        url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/reada/getTask",
+        url : "http://m."+fqkkurl.match(/m.(.*?)reada/)[1]+"reada/getTask",
         headers : JSON.parse(fqkkhd),
         body : '',}
       $.post(url, async (err, resp, data) => {
@@ -166,10 +195,9 @@ let url = {
         fqkey = result.data.jkey
         console.log(fqkey)
         await fqkk2();
-        await fqread();
+        //await fqread();
         await $.wait(1000);
         fqjs++
-        await fqkk1();
 } else {
 console.log('番茄看看获取key回执:失败🚫 '+result.msg+' 已停止当前账号运行!')
 }
@@ -178,7 +206,7 @@ console.log('番茄看看获取key回执:失败🚫 '+result.msg+' 已停止当�
         } finally {
           resolve()
         }
-      })
+//      })
     },timeout)
   })
 }
@@ -188,7 +216,7 @@ console.log('番茄看看获取key回执:失败🚫 '+result.msg+' 已停止当�
 function fqkktx(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/withdrawal/doWithdraw",
+        url : "http://m."+fqkkurl.match(/m.(.*?)reada/)[1]+"withdrawal/doWithdraw",
         headers : JSON.parse(fqkkhd),
         body : 'amount='+fqtx,}
       $.post(url, async (err, resp, data) => {
@@ -215,7 +243,7 @@ let url = {
 function fqread(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : "http://m."+fqkkurl.match(/m.(.*?).top/)[1]+".top/reada/toRead?sign="+fqkey+"&for=",
+        url : "http://m."+fqkkurl.match(/m.(.*?)reada/)[1]+"reada/toRead?sign="+fqkey+"&for=",
         headers : JSON.parse(fqkkhd),
    }
       $.get(url, async (err, resp, data) => {
