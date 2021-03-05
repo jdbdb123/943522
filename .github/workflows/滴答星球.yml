@@ -30,7 +30,7 @@ jobs:
       - name: '运行 【滴答星球】'
         if: env.DDXQ_HD
         run: |
-          node workflow/ddxq.js
+          node workflow/DiDaXingQiu.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
