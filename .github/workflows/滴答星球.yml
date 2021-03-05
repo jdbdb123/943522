@@ -4,7 +4,7 @@ name: 滴答星球
 on:
   workflow_dispatch:
   schedule:
-     - cron: '13 1-13 * * *'
+     - cron: '13 1 * * *'
   watch:
     types: started
 jobs:
