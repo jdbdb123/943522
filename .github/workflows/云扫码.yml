@@ -31,7 +31,7 @@ jobs:
       - name: '运行 【云扫码】'
         if: env.YSM_HD
         run: |
-          node workflow/ysm.js
+          node workflow/ysm1.js
         env:
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN}}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
