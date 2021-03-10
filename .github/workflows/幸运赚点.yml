@@ -4,7 +4,7 @@ name: 幸运赚点
 on:
   workflow_dispatch:
   schedule:
-     - cron: '30 1-11 * * *'
+     - cron: '1 1-11 * * *'
   watch:
     types: started
 jobs:
