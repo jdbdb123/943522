@@ -1,4 +1,4 @@
-name: xyzd
+name: 幸运赚点
 
 
 on:
@@ -27,7 +27,7 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【xyzd】'
+      - name: '运行 【幸运赚点】'
         if: env.XYZD_HD
         run: |
           node task/xyzd.js
