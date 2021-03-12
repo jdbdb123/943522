@@ -1,31 +1,5 @@
-/*
-tgchannel：https://t.me/ZhiYi_Script
-github：https://github.com/ZhiYi-N/script
-boxjs：https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/ZhiYi-N.boxjs.json
-转载留个名字，谢谢
-邀请码：AVJ6
 
-谢谢
-作者：执意ZhiYi-N
-#看一次广告获取ck
-
-[mitm]
-hostname = pingyouquan.com
-#圈x
-[rewrite local]
-https://pingyouquan.com/tp5/public/index.php/app/gold/adv url script-request-body https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/pyq.js
-
-
-#loon
-http-request https://pingyouquan.com/tp5/public/index.php/app/gold/adv script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/pyq.js, requires-body=true, timeout=10, tag=评有圈
-
-
-#surge
-评有圈 = type=http-request,pattern=https://pingyouquan.com/tp5/public/index.php/app/gold/adv,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ZhiYi-N/Private-Script/master/Scripts/pyq.js,script-update-interval=0
-
-*/
-
-const zhiyi = '评有圈'
+const zhiyi = '评友圈'
 const $ = Env(zhiyi)
 const notify = $.isNode() ?require('./sendNotify') : '';
 let status,commentid;
@@ -35,7 +9,7 @@ let pyqUA = $.getdata('pyqUA')
 let pyqad = $.getdata('pyqad')
 let last_id = ($.getdata('last_id') || 1880000)
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
-const invite=1;//新用户自动邀请，0关闭，1默认开启
+const invite=0;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
 var hour=''
 var minute=''
