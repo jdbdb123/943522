@@ -37,7 +37,7 @@ if ($.isNode()) {
    pyqUA = process.env.PYQUA.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   pyqUA = process.env.PYQUA
+   pyqUA = process.env.PYQ_UA
   };
   if (process.env.PYQAD && process.env.PYQAD.indexOf('#') > -1) {
    pyqad = process.env.PYQAD.split('#');
@@ -47,7 +47,7 @@ if ($.isNode()) {
    pyqad = process.env.PYQAD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   pyqad = process.env.PYQAD
+   pyqad = process.env.PYQ_AD
   };
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
