@@ -29,22 +29,22 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-   if (process.env.PYQUA && process.env.PYQUA.indexOf('#') > -1) {
-   pyqUA = process.env.PYQUA.split('#');
+   if (process.env.PYQ_UA && process.env.PYQ_UA.indexOf('#') > -1) {
+   pyqUA = process.env.PYQ_UA.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.PYQUA && process.env.PYQUA.indexOf('\n') > -1) {
-   pyqUA = process.env.PYQUA.split('\n');
+  else if (process.env.PYQ_UA && process.env.PYQ_UA.indexOf('\n') > -1) {
+   pyqUA = process.env.PYQ_UA.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
    pyqUA = process.env.PYQ_UA
   };
-  if (process.env.PYQAD && process.env.PYQAD.indexOf('#') > -1) {
-   pyqad = process.env.PYQAD.split('#');
+  if (process.env.PYQ_AD && process.env.PYQ_AD.indexOf('#') > -1) {
+   pyqad = process.env.PYQ_AD.split('#');
    console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.PYQAD && process.env.PYQAD.indexOf('\n') > -1) {
-   pyqad = process.env.PYQAD.split('\n');
+  else if (process.env.PYQ_AD && process.env.PYQ_AD.indexOf('\n') > -1) {
+   pyqad = process.env.PYQ_AD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
    pyqad = process.env.PYQ_AD
