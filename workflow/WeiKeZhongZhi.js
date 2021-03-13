@@ -2,40 +2,30 @@
 软件名称:微客众智
 更新时间：2021-03-13 @肥皂
 */
+
+
 const $ = new Env('微客众智自动阅读');
 let status;
 status = (status = ($.getval("wkzzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-const wkzzurlArr = [], wkzzhdArr = [],wkzzcount = ''
+let wkzzurlArr = [], wkzzhdArr = [],wkzzcount = ''
 let times = Math.round(Date.now() / 1000)
 let wkzzurl = $.getdata('wkzzurl')
 let wkzzhd = $.getdata('wkzzhd')
 let wkzzkey = '',id = '',uid='',tid='',name=''
+let max = 60
+let min = 17
+
 if ($.isNode()) {
-   if (process.env.WKZZ_URL && process.env.WKZZ_URL.indexOf('#') > -1) {
-   wkzzurlArr = process.env.WKZZ_URL.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.WKZZ_URL && process.env.WKZZ_URL.indexOf('\n') > -1) {
-   wkzzurlArr = process.env.WKZZ_URL.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   wkzzurlArr = process.env.WKZZ_URL.split()
-  };
   if (process.env.WKZZ_HD && process.env.WKZZ_HD.indexOf('#') > -1) {
    wkzzhdArr = process.env.WKZZ_HD.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.WKZZ_HD && process.env.WKZZ_HD.indexOf('\n') > -1) {
-   wkzzhdArr = process.env.WKZZ_HD.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
+   console.log(`您选择的是用#隔开\n`)
   } else {
    wkzzhdArr = process.env.WKZZ_HD.split()
   };
-	
+  
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
- } else {
-    wkzzurlArr.push($.getdata('wkzzurl'))
+ } else {wkzzurlArr.push($.getdata('wkzzurl'))
     wkzzhdArr.push($.getdata('wkzzhd'))
     let wkzzcount = ($.getval('wkzzcount') || '1');
   for (let i = 2; i <= wkzzcount; i++) {
@@ -44,16 +34,11 @@ if ($.isNode()) {
   }
 }
 
+
 !(async () => {
-  if (typeof $request !== "undefined") {
-    await wkzzck()
-   
-  } else {wkzzurlArr.push($.getdata('wkzzurl'))
-    wkzzhdArr.push($.getdata('wkzzhd'))
-    let wkzzcount = ($.getval('wkzzcount') || '1');
-  for (let i = 2; i <= wkzzcount; i++) {
-    wkzzurlArr.push($.getdata(`wkzzurl${i}`))
-    wkzzhdArr.push($.getdata(`wkzzhd${i}`))
+if (!wkzzhdArr[0]) {
+    $.msg($.name, '【提示】请先获取一cookie')
+    return;
   }
     console.log(`------------- 共${wkzzhdArr.length}个账号-------------\n`)
       for (let i = 0; i < wkzzhdArr.length; i++) {
@@ -66,7 +51,7 @@ if ($.isNode()) {
     await wkzz1();
 
   }
-}}
+}
 
 })()
   .catch((e) => $.logErr(e))
@@ -91,11 +76,6 @@ $.log(wkzzhd)
 //微客众智key
 function wkzz1(timeout = 0) {
   return new Promise((resolve) => {
-    setTimeout( ()=>{
-      if (typeof $.getdata('wkzzhd') === "undefined") {
-        $.msg($.name,"",'请先获取微客众智数据!😓',)
-        $.done()
-      }
 
 let url = {
         url : "http://wx.tiantianaiyuedu.site/me",
@@ -122,7 +102,6 @@ console.log('微客众智获取用户信息失败 已停止当前账号运行!')
         } finally {
           resolve()
         }
-      })
     },timeout)
   })
 }
@@ -178,7 +157,9 @@ let url = {
             $.logErr(`API请求失败，请检查网络后重试 \n data: ${data}`)
           } else {
 console.log('\n微客众智阅读文章成功,开始领取阅读奖励')
-        await $.wait(1000);
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log("随机延时"+random+"毫秒");
+	      await $.wait(random); 
         await wkzzyd();
 } 
    
