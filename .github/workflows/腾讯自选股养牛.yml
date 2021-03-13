@@ -13,7 +13,6 @@ jobs:
       
       USERHEADER: ${{ secrets.TXS_USERHEADER }}
       USERKEY: ${{ secrets.TXS_USERKEY }}
-      CASHHEADER: ${{ secrets.TXS_CASHHEADER }}
       SIGNHEADER: ${{ secrets.TXS_SIGNHEADER }}
       SIGNKEY: ${{ secrets.TXS_SIGNKEY }}
       TASKHEADER: ${{ secrets.TXS_TASKHEADER }}
