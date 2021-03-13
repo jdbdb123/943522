@@ -96,7 +96,7 @@ if ($.isNode()) {
   } else {
    wxtaskkeyVal = [process.env.WXTASKKEY]
   };
-  if (process.env.COWKEY && process.env.COWKEY.indexOf('\n') > -1) {
+  if (process.env.COWKEY && process.env.COWKEY.indexOf('#') > -1) {
    cowkeyVal = process.env.COWKEY.split('#');
    console.log(`COWKEY您选择的是用#隔开\n`)
   } else {
