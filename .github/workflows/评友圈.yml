@@ -27,7 +27,7 @@ jobs:
         run: |
           npm install
       - name: '运行 【评友圈】'
-        if: env.PYQ_UA
+        if: env.PYQ_AD
         run: |
           node workflow/pingyoquan.js
         env:
