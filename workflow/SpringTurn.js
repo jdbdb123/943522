@@ -19,13 +19,13 @@ if ($.isNode()) {
    cfzurlArr = process.env.CFZ_URL.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   cfzurlArr = process.env.CFZ_URL.split()
+   cfzurlArr = process.env.CFZ_URL
   };
   if (process.env.CFZ_HD && process.env.CFZ_HD.indexOf('\n') > -1) {
    cfzhdArr = process.env.CFZ_HD.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   cfzhdArr = process.env.CFZ_HD.split()
+   cfzhdArr = process.env.CFZ_HD
   };
 
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
