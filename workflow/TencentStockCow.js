@@ -50,37 +50,67 @@ let COWKEY = [];
 
 
 if ($.isNode()) {
-  if (process.env.USERHEADERVAL) {
-	userheaderVal = process.env.USERHEADERVAL;
-}
+ 
+  if (process.env.USERHEADER && process.env.USERHEADER.indexOf('\n') > -1) {
+   userheaderVal = process.env.USERHEADER.split('\n');
+   console.log(`USERHEADER您选择的是用换行隔开\n`)
+  }
+  else {
+  userheaderVal = [process.env.USERHEADER]
+  };
+  if (process.env.USERKEY && process.env.USERKEY.indexOf('\n') > -1) {
+   userkeyVal = process.env.USERKEY.split('\n');
+   console.log(`USERKEY您选择的是用换行隔开\n`)
+  } else {
+   userkeyVal = [process.env.USERKEY]
+  };
+  if (process.env.CASHHEADER && process.env.CASHHEADER.indexOf('\n') > -1) {
+   cashheaderVal = process.env.CASHHEADER.split('\n');
+   console.log(`CASHHEADER您选择的是用换行隔开\n`)
+  }
+  else {
+  cashheaderVal = [process.env.CASHHEADER]
+  };
+  if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('\n') > -1) {
+   signheaderVal = process.env.SIGNHEADER.split('\n');
+   console.log(`SIGNHEADER您选择的是用换行隔开\n`)
+  } else {
+   signheaderVal = [process.env.SIGNHEADER]
+  };
+   if (process.env.SIGNKEY && process.env.SIGNKEY.indexOf('\n') > -1) {
+   signkeyVal = process.env.SIGNKEY.split('\n');
+   console.log(`SIGNKEY您选择的是用换行隔开\n`)
+  }
+  else {
+  signkeyVal = [process.env.SIGNKEY]
+  };
+  if (process.env.TASKHEADER && process.env.TASKHEADER.indexOf('\n') > -1) {
+   taskheaderVal = process.env.TASKHEADER.split('\n');
+   console.log(`TASKHEADER您选择的是用换行隔开\n`)
+  } else {
+   taskheaderVal = [process.env.TASKHEADER]
+  };
+  if (process.env.TASKKEY && process.env.TASKKEY.indexOf('\n') > -1) {
+   taskkeyVal = process.env.TASKKEY.split('\n');
+   console.log(`TASKKEY您选择的是用换行隔开\n`)
+  }
+  else {
+  taskkeyVal = [process.env.TASKKEY]
+  };
+  if (process.env.WXTASKKEY && process.env.WXTASKKEY.indexOf('\n') > -1) {
+   wxtaskkeyVal = process.env.WXTASKKEY.split('\n');
+   console.log(`WXTASKKEY您选择的是用换行隔开\n`)
+  } else {
+   wxtaskkeyVal = [process.env.WXTASKKEY]
+  };
+  if (process.env.COWKEY && process.env.COWKEY.indexOf('\n') > -1) {
+   cowkeyVal = process.env.COWKEY.split('\n');
+   console.log(`COWKEY您选择的是用换行隔开\n`)
+  } else {
+   cowkeyVal = [process.env.COWKEY]
+  };
 
-  if (process.env.USERKEYVAL) {
-	userkeyVal = process.env.USERKEYVAL;
-}
-  
-  if (process.env.SIGNHEADERVAL) {
-	 signheaderVal = process.env.SIGNHEADERVAL;
-}
-  
-  if (process.env.SIGNKEYVAL) {
-	 signkeyVal = process.env.SIGNKEYVAL;
-}
-  
-  if (process.env.TASKHEADERVAL) {
-	 taskheaderVal = process.env.TASKHEADERVAL;
-}
-  
-  if (process.env.TASKKEYVAL) {
-	 taskkeyVal = process.env.TASKKEYVAL;
-}
-  if (process.env.WXTASKKEYVAL) {
-	 wxtaskkeyVal = process.env.WXTASKKEYVAL;
-}
-  if (process.env.COWKEYVAL) {
-	 cowkeyVal = process.env.COWKEYVAL;
-}
-  
-  
+
   Object.keys(userheaderVal).forEach((item) => {
     if (userheaderVal[item]) {
       userheaderArr.push(signheaderVal[item])
