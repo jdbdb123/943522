@@ -64,13 +64,6 @@ if ($.isNode()) {
   } else {
    userkeyVal = [process.env.USERKEY]
   };
-  if (process.env.CASHHEADER && process.env.CASHHEADER.indexOf('\n') > -1) {
-   cashheaderVal = process.env.CASHHEADER.split('\n');
-   console.log(`CASHHEADER您选择的是用换行隔开\n`)
-  }
-  else {
-  cashheaderVal = [process.env.CASHHEADER]
-  };
   if (process.env.SIGNHEADER && process.env.SIGNHEADER.indexOf('\n') > -1) {
    signheaderVal = process.env.SIGNHEADER.split('\n');
    console.log(`SIGNHEADER您选择的是用换行隔开\n`)
