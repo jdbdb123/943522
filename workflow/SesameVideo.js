@@ -34,15 +34,6 @@ if ($.isNode() && process.env.ZM_zhimabody) {
     } else {
         middlezhimabody = process.env.ZM_zhimabody.split();
     }
-
-    if (
-        process.env.ZM_zhimatxbody &&
-        process.env.ZM_zhimatxbody.indexOf(COOKIES_SPLIT) > -1
-    ) {
-        middlezhimatxbody = process.env.ZM_zhimatxbody.split(COOKIES_SPLIT);
-    } else {
-        middlezhimatxbody = process.env.ZM_zhimatxbody.split();
-    }
 }
 if (COOKIE.zhimabodyVal) {
     ZM_COOKIES = {
@@ -56,13 +47,13 @@ if (!COOKIE.zhimabodyVal) {
         Object.keys(middlezhimabody).forEach((item) => {
             if (middlezhimabody[item]) {
                 zhimabodyArr.push(middlezhimabody[item]);
-                zhimatxbodyArr.push(middlezhimatxbody[item]);
+       
             }
         });
 
     } else {
         zhimabodyArr.push($.getdata("zhimabody"));
-        zhimatxbodyArr.push($.getdata("zhimatxbody"));
+        
         // 根据boxjs中设置的额外账号数，添加存在的账号数据进行任务处理
         if ("zhimaCASH") {
             CASH = $.getval("zhimaCASH") || '0';
@@ -71,7 +62,7 @@ if (!COOKIE.zhimabodyVal) {
         for (let i = 2; i <= zhimaCount; i++) {
             if ($.getdata(`zhimabody${i}`)) {
                 zhimabodyArr.push($.getdata(`zhimabody${i}`));
-                zhimatxbodyArr.push($.getdata(`zhimatxbody${i}`));
+                
 
 
             }
