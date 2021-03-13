@@ -1,5 +1,6 @@
 
-const zhiyi = '评友圈'
+
+const zhiyi = '评有圈'
 const $ = Env(zhiyi)
 const notify = $.isNode() ?require('./sendNotify') : '';
 let status,commentid;
@@ -29,26 +30,23 @@ if (isGetCookie) {
    $.done()
 } 
 if ($.isNode()) {
-   if (process.env.PYQ_UA && process.env.PYQ_UA.indexOf('#') > -1) {
-   pyqUA = process.env.PYQ_UA.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.PYQ_UA && process.env.PYQ_UA.indexOf('\n') > -1) {
-   pyqUA = process.env.PYQ_UA.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   pyqUA = process.env.PYQ_UA
-  };
-  if (process.env.PYQ_AD && process.env.PYQ_AD.indexOf('#') > -1) {
-   pyqad = process.env.PYQ_AD.split('#');
-   console.log(`您选择的是用"#"隔开\n`)
-  }
-  else if (process.env.PYQ_AD && process.env.PYQ_AD.indexOf('\n') > -1) {
-   pyqad = process.env.PYQ_AD.split('\n');
-   console.log(`您选择的是用换行隔开\n`)
-  } else {
-   pyqad = process.env.PYQ_AD
-  };
+  
+   pyqUA = process.env.PYQ_UA.split();
+  
+  
+   pyqad = process.env.PYQ_AD.split();
+  
+  Object.keys(pyqUA).forEach((item) => {
+        if (pyqUA[item]) {
+          pyqUAArr.push(pyqUA[item])
+        }
+    });
+    Object.keys(pyqad).forEach((item) => {
+        if (pyqad[item]) {
+          pyqadArr.push(pyqad[item])
+        }
+    });
+
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
@@ -102,6 +100,7 @@ $.setdata(`${id}`,'last_id')
 let index = Math.round(Math.random()*10)
 text = texts[index]
 await qd()
+
 await $.wait(10000)
 await tp_d()
 await $.wait(10000)
@@ -114,6 +113,7 @@ await $.wait(10000)
 await fx()
 await $.wait(10000)
 await ad()
+
 }
 //qd
 async function qd(){
@@ -136,7 +136,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(qd_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`)
+       $.log(data)
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log("签到"+result.msg+'\n')
         }catch(e) {
@@ -167,7 +169,8 @@ $.log('点赞图文id为：'+id)
     	}
    $.post(tp_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`) 
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
@@ -180,7 +183,7 @@ $.log('点赞图文id为：'+id)
   } 
 //tp_d
 async function tp_d(){
-$.log('取消点赞id为：'+last_id)
+$.log('取消点赞id为：'+id)
 let uid = pyqad.match(/\d{6}/)
  return new Promise((resolve) => {
     let tp_d_url = {
@@ -194,11 +197,12 @@ let uid = pyqad.match(/\d{6}/)
           "Host": "pingyouquan.com",
           "User-Agent": `${pyqUA}`
           },
-        body: `{"pid":${last_id},"uid":${uid},"type":1}`
+        body: `{"pid":${id},"uid":${uid},"type":1}`
     	}
    $.post(tp_d_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`) 
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
@@ -234,7 +238,10 @@ ${uid}
     	}
    $.post(comment_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       //$.log(data)
+       data=data.replace(/^.*?{/, `{`) 
+       //$.log(data)
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
@@ -265,7 +272,10 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(comment_list_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       //$.log(data)
+       data=data.replace(/^.*?{/, `{`) 
+       //$.log(data)
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         let commentArr = result.list.find(item => item.uid == uid)
         commentid = commentArr.id
@@ -300,7 +310,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(commentdel_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`) 
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log('评论'+result.msg+'\n')
         }catch(e) {
@@ -330,7 +341,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(fx_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`) 
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log('分享'+result.msg+'\n')
         }catch(e) {
@@ -359,7 +371,8 @@ async function ad(){
     	}
    $.post(ad_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
+       data=data.replace(/^.*?{/, `{`) 
+       const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log('广告'+result.msg+'\n')
         }catch(e) {
