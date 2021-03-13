@@ -29,7 +29,7 @@ jobs:
       - name: '运行 【微客众智】'
         if: env.WKZZ_HD
         run: |
-          node workflow/WeiKeZhongzhi.js
+          node workflow/WeiKeZhongZhi.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
