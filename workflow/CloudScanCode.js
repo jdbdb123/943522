@@ -195,7 +195,7 @@ let url = {
     //const result = JSON.parse(data)
        console.log('\n云扫码key提交成功,10秒后开始领取阅读奖励') 
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
-        console.log(random);
+        console.log("随机延时"+random+"毫秒");
 	await $.wait(random);     
         //await $.wait(9000);
         await ysm3(); 
