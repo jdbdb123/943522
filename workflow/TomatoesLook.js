@@ -7,8 +7,8 @@ let fqkkhd = $.getdata('fqkkhd')
 let fqkey = ''
 let fqkkxh = ($.getval('fqkkxh') || '20');  // 此处修改循环次数，默认一百
 let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.1元等于10，默认为提现一元，也就是100
-let max = 90
-let min = 18
+let max = 105
+let min = 26
 
 if ($.isNode()) {
    if (process.env.FQKK_URL && process.env.FQKK_URL.indexOf('#') > -1) {
@@ -155,7 +155,7 @@ let url = {
        console.log('\n番茄看看key提交成功,即将开始领取阅读奖励') 
 	await fqread();
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
-        console.log(random);
+        console.log("随机延时"+random+"毫秒");
 	await $.wait(random);       
        // await $.wait(15000);
         await fqkk3(); 
