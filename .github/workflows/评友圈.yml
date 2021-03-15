@@ -4,7 +4,7 @@ name: 评友圈
 on:
   workflow_dispatch:
   schedule:
-     - cron: '30 1-11 * * *'
+     - cron: '30 1-15 * * *'
   watch:
     types: started
 jobs:
