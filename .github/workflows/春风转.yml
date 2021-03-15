@@ -4,7 +4,7 @@ name: 春风转
 on:
   workflow_dispatch:
   schedule:
-     - cron: '3,33 1-11 * * *'
+     - cron: '3,33 1-6 * * *'
   watch:
     types: started
 jobs:
