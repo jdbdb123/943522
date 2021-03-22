@@ -340,7 +340,7 @@ async function all() {
             await withdraw(); //提现
         }
 
-        if (LIVE >= 1 && nowTimes.getHours() >= 8 && nowTimes.getHours() <= 23 && $.sylist.resultCode && livecs < 30) {
+        if (LIVE >= 1 && nowTimes.getHours() >= 8 && nowTimes.getHours() <= 23 && $.sylist.resultCode && livecs < 10) {
             await liveslist(); //直播节目表
             if (liveIdcd >= 1) {
                 dd = liveIdcd * 35 - 34
