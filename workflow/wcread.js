@@ -49,13 +49,13 @@ let name = ($.getval('name') || '');//提现支付宝用户名
 let txje = ($.getval('txje') || '0.1');//自定义提现金额
 
 if ($.isNode()) {
-  /*if (process.env.WCYD_URL && process.env.WCYD_URL.indexOf('\n') > -1) {
+  if (process.env.WCYD_URL && process.env.WCYD_URL.indexOf('\n') > -1) {
    wcydurlArr = process.env.WCYD_URL.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
    wcydurlArr = process.env.WCYD_URL.split()
   };
-*/
+
   
   if (process.env.WCYD_HD && process.env.WCYD_HD.indexOf('\n') > -1) {
    wcydhdArr = process.env.WCYD_HD.split('\n');
