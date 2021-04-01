@@ -27,7 +27,7 @@ jobs:
         run: |
           npm install
       - name: '运行 【文创阅读】'
-        if: env.LLYD_HD
+        if: env.WCYD_HD
         run: |
           node workflow/Sixty-SixRead.js
         env:
