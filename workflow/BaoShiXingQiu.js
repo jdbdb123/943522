@@ -8,12 +8,12 @@ let xxlbody1 = $.getdata('xxlbody1')
 let xxlheader2 = $.getdata('xxlheader2')
 let xxlbody2 = $.getdata('xxlbody2')
 
-let xxlheader1 = ``
+let xxlheader1 = `{"Content-Type":"application/octet-stream","gamePackage":"com.ios.candy.match","X-Unity-Version":"2019.3.0f6","Accept":"*/*","Host":"r1.nullpointerexception.cn","Accept-Language":"zh-cn","token":"250889a1466f45b18a1a0c4171bea998","Accept-Encoding":"gzip, deflate, br","Content-Length":"119","User-Agent":"%E6%B3%A1%E6%B3%A1%E6%B6%88%E6%B6%88%E6%B6%88/104 CFNetwork/1209 Darwin/20.2.0","Connection":"keep-alive","deviceudid":"97c7ec68-4590-4e05-9cac-e1db87008bd1-1618228783686","sign":"2b647268d0412c1890e3308a0d4fc741"}`
 
-let xxlbody1 = ``
-let xxlheader2 = ``
+let xxlbody1 = `{"userID":8123405885,"isLoginMsg":false,"userType":"D","time":1618240131633,"maxPassId":0,"playerLevel":0,"passType":0}`
+let xxlheader2 = `{"Content-Type":"application/octet-stream","gamePackage":"com.ios.candy.match","X-Unity-Version":"2019.3.0f6","Accept":"*/*","Host":"r1.nullpointerexception.cn","Accept-Language":"zh-cn","token":"250889a1466f45b18a1a0c4171bea998","Accept-Encoding":"gzip, deflate, br","Content-Length":"120","User-Agent":"%E6%B3%A1%E6%B3%A1%E6%B6%88%E6%B6%88%E6%B6%88/104 CFNetwork/1209 Darwin/20.2.0","Connection":"keep-alive","deviceudid":"97c7ec68-4590-4e05-9cac-e1db87008bd1-1618228783686","sign":"d4ca665b716e305232b460d74ffedf33"}`
 
-let xxlbody2 = ``
+let xxlbody2 = `{"userID":8123405885,"isLoginMsg":false,"userType":"D","time":1618240275768,"adType":4,"isActiveClick":true,"price":2.0}`
 
 let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
