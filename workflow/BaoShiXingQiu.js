@@ -8,6 +8,12 @@ let xxlbody1 = $.getdata('xxlbody1')
 let xxlheader2 = $.getdata('xxlheader2')
 let xxlbody2 = $.getdata('xxlbody2')
 
+let xxlheader1 = ``
+
+let xxlbody1 = ``
+let xxlheader2 = ``
+
+let xxlbody2 = ``
 
 let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
